@@ -1,0 +1,72 @@
+/* src/components/Navbar.css */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  
+  background-color: rgba(26, 26, 26, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffffff;
+  text-decoration: none;
+  /* Add some margin to prevent the scrolling links from overlapping the logo */
+  margin-right: 1rem; 
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  color: #cccccc;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #f06ca4;
+}
+
+.navbar-social-link {
+  display: flex;
+  align-items: center;
+}
+
+/* --- NEW MOBILE STYLES FOR SCROLLING --- */
+@media (max-width: 768px) {
+  .nav-links {
+    /* Allows the container to scroll horizontally */
+    overflow-x: auto; 
+    
+    /* Prevents links from wrapping to a new line */
+    white-space: nowrap; 
+    
+    /* Hides the scrollbar for a cleaner look on most browsers */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+  /* Hides the scrollbar for Chrome, Safari and Opera */
+  .nav-links::-webkit-scrollbar {
+    display: none;
+  }
+}

@@ -1,0 +1,22 @@
+/* src/components/StarryBackground.css */
+
+.starry-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  /* This line provides the black background for the whole page */
+  background-color: black;
+  background-image:
+    radial-gradient(2px 2px at 20px 30px, white, transparent),
+    radial-gradient(1.5px 1.5px at 50px 70px, white, transparent),
+    radial-gradient(2px 2px at 80px 90px, white, transparent),
+    radial-gradient(1px 1px at 110px 120px, white, transparent),
+    radial-gradient(1.5px 1.5px at 140px 160px, white, transparent);
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  /* z-index: 0 ensures it's behind everything else */
+  z-index: 0;
+}

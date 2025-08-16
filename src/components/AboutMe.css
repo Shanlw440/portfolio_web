@@ -1,0 +1,34 @@
+/* src/components/AboutMe.css */
+
+/* The main container for the section */
+.about-me-section {
+  max-width: 800px;
+  margin: 4rem auto;
+  text-align: left; /* Changed from 'center' to 'left' */
+}
+
+/* The pink title styling */
+.about-me-section h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #f06ca4;
+  margin-bottom: 2.5rem;
+  letter-spacing: 1.5px;
+  display: inline-block;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #f06ca4;
+}
+
+/* Readable paragraph text */
+.about-me-section p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #cccccc;
+  text-align: left;
+  margin-bottom: 1.5rem;
+}
+
+/* Removes the bottom margin from the very last paragraph */
+.about-me-section p:last-of-type {
+  margin-bottom: 0;
+}

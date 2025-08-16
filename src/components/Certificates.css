@@ -1,0 +1,59 @@
+/* src/components/Certificates.css */
+
+.certificates-section {
+  max-width: 1000px;
+  margin: 4rem auto;
+  padding: 2rem;
+  background-color: #1a1a1a;
+  border-radius: 10px;
+  border: 1px solid #333;
+  text-align: center;
+}
+
+.certificates-section h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #f06ca4;
+  margin-bottom: 2rem;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid #f06ca4;
+  display: inline-block;
+  padding-bottom: 0.5rem;
+  /* Removed text-transform: uppercase */
+}
+
+.cert-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  justify-content: center;
+}
+
+.cert-card {
+  background-color: #111;
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 1rem;
+  text-decoration: none;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.cert-card:hover {
+  border-color: #f06ca4;
+  box-shadow: 0 0 10px #f06ca4;
+}
+
+.cert-thumb {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.75rem;
+}
+
+.cert-thumb img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+}
