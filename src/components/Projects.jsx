@@ -1,19 +1,6 @@
 // src/components/Projects.jsx
-
 import React from "react";
 import "./Projects.css";
-
-// --- IMAGES FOR ALL PROJECTS ---
-import coffeeShopImg1 from "../assets/projects/Powerbi dash page 1.png";
-import coffeeShopImg2 from "../assets/projects/Powerbi dash page 2.png";
-import coffeeShopImg3 from "../assets/projects/Powerbi dash page 3.png";
-import logisticsMainImg from "../assets/projects/Logistics dash page 1.png";
-import logisticsPage2Img from "../assets/projects/Logistics dash page 2.png";
-import pythonPage1Img from "../assets/projects/python page 1.png";
-import pythonPage2Img from "../assets/projects/python page 2.png";
-import pythonPage3Img from "../assets/projects/python page 3.png";
-import sqlPage1Img from "../assets/projects/SQL Page 1.png";
-import sqlPage2Img from "../assets/projects/sql page 2.png";
 
 function Projects() {
   return (
@@ -93,8 +80,8 @@ function Projects() {
           </div>
         </div>
         <div className="project-gallery">
-          <img src={logisticsMainImg} alt="Logistics Dashboard Main" className="gallery-image" />
-          <img src={logisticsPage2Img} alt="Logistics Dashboard Details" className="gallery-image" />
+          <img src="/projects/logistics-1.png" alt="Logistics Dashboard Main" className="gallery-image" />
+          <img src="/projects/logistics-2.png" alt="Logistics Dashboard Details" className="gallery-image" />
         </div>
       </div>
 
@@ -123,9 +110,9 @@ function Projects() {
           </a>
         </div>
         <div className="project-gallery">
-          <img src={pythonPage1Img} alt="PDF Report Page 1" className="gallery-image" />
-          <img src={pythonPage2Img} alt="PDF Report Page 2" className="gallery-image" />
-          <img src={pythonPage3Img} alt="PDF Report Page 3" className="gallery-image" />
+          <img src="/projects/python-1.png" alt="PDF Report Page 1" className="gallery-image" />
+          <img src="/projects/python-2.png" alt="PDF Report Page 2" className="gallery-image" />
+          <img src="/projects/python-3.png" alt="PDF Report Page 3" className="gallery-image" />
         </div>
       </div>
 
@@ -152,8 +139,8 @@ function Projects() {
           </a>
         </div>
         <div className="project-gallery">
-          <img src={sqlPage1Img} alt="SQL Query Examples" className="gallery-image" />
-          <img src={sqlPage2Img} alt="SQL Query Results" className="gallery-image" />
+          <img src="/projects/sql-1.png" alt="SQL Query Examples" className="gallery-image" />
+          <img src="/projects/sql-2.png" alt="SQL Query Results" className="gallery-image" />
         </div>
       </div>
 
@@ -172,9 +159,9 @@ function Projects() {
           </div>
         </div>
         <div className="project-gallery">
-          <img src={coffeeShopImg1} alt="Coffee Shop Dashboard View 1" className="gallery-image" />
-          <img src={coffeeShopImg2} alt="Coffee Shop Dashboard View 2" className="gallery-image" />
-          <img src={coffeeShopImg3} alt="Coffee Shop Dashboard View 3" className="gallery-image" />
+          <img src="/projects/powerbi-1.png" alt="Coffee Shop Dashboard View 1" className="gallery-image" />
+          <img src="/projects/powerbi-2.png" alt="Coffee Shop Dashboard View 2" className="gallery-image" />
+          <img src="/projects/powerbi-3.png" alt="Coffee Shop Dashboard View 3" className="gallery-image" />
         </div>
       </div>
     </section>
