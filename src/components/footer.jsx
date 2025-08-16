@@ -1,7 +1,7 @@
 // src/components/Footer.jsx
 
 import React from "react";
-import "./Footer.css";
+import "./footer.css";
 
 // A simple SVG icon for LinkedIn
 const LinkedInIcon = () => (
