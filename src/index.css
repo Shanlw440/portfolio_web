@@ -1,0 +1,27 @@
+/* Tailwind v4 setup */
+@import "tailwindcss";
+
+/* Tell Tailwind where to scan */
+@source "../index.html";
+@source "./**/*.{js,jsx,ts,tsx}";
+
+/* Custom tokens */
+@theme {
+  --color-navy: #0a0f2c;
+  --color-teal: #06b6d4;
+  --color-ink:  #1a1f3c;
+
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  --font-display: "Poppins", "Montserrat", ui-sans-serif, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+/* Base tweaks */
+html, body, #root { height: 100%; }
+body {
+  background: var(--color-navy);
+  color: white;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+::selection { background: white; color: var(--color-navy); }
