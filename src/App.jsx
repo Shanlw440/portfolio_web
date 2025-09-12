@@ -1,52 +1,23 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
-/* =========================================================
-   Small reveal-on-scroll helper (no extra libraries)
-   ========================================================= */
-function Reveal({ as: Tag = "div", delay = 0, children, className = "" }) {
-  const ref = useRef(null);
-  const [show, setShow] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            setTimeout(() => setShow(true), delay);
-            io.unobserve(el);
-          }
-        });
-      },
-      { rootMargin: "0px 0px -10% 0px", threshold: 0.2 }
-    );
-
-    io.observe(el);
-    return () => io.disconnect();
-  }, [delay]);
-
-  return (
-    <Tag
-      ref={ref}
-      className={[
-        "transition-all duration-700 ease-out will-change-transform",
-        show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6",
-        className,
-      ].join(" ")}
+/* -------------------------------------------
+   Small helpers
+--------------------------------------------*/
+const Pill = ({ children }) => (
+  <div className="flex justify-center mb-8">
+    <span
+      className="inline-flex items-center gap-2 px-6 py-2 rounded-full
+                 border-2 border-teal bg-navy/70 backdrop-blur
+                 text-[12px] tracking-[0.25em] uppercase"
     >
       {children}
-    </Tag>
-  );
-}
+    </span>
+  </div>
+);
 
-/* =========================================================
-   Reusable bits
-   ========================================================= */
-const TEAL = "#00B8D9";
-
-/* Keep disc 48x48, force logo inside to 44x44 for visibility */
+/* Keep disc 48x48 and logo ~44px inside so icons are larger */
 function IconDiscImg({ src, alt = "" }) {
   return (
     <span className="shrink-0 w-12 h-12 rounded-full bg-teal flex items-center justify-center">
@@ -59,98 +30,9 @@ function IconDiscImg({ src, alt = "" }) {
   );
 }
 
-/* Pill */
-function Pill({ children }) {
-  return (
-    <span className="px-6 py-2 rounded-full border-2 border-teal bg-teal/10 text-white font-extrabold tracking-[0.28em] text-xs md:text-sm uppercase">
-      {children}
-    </span>
-  );
-}
-
-/* Project Row */
-function ProjectRow({
-  no,
-  title,
-  images = [],
-  desc,
-  built,
-  focus,
-  cta,
-  ctaHref,
-  last = false,
-}) {
-  return (
-    <Reveal
-      as="article"
-      className={[
-        "max-w-6xl mx-auto px-6",
-        last ? "" : "pb-20 lg:pb-24",
-      ].join(" ")}
-    >
-      {/* header line */}
-      <div className="flex items-center gap-4 mb-6 justify-center">
-        <span className="text-white font-extrabold text-4xl md:text-5xl leading-none">
-          {no.toString().padStart(2, "0")}
-        </span>
-        <h4 className="font-[var(--font-display)] font-extrabold text-teal text-[clamp(22px,3.2vw,34px)] leading-tight text-center">
-          {title}
-        </h4>
-      </div>
-
-      {/* media */}
-      {images.length > 0 && (
-        <div className="flex flex-wrap items-center justify-center gap-6 mb-6">
-          {images.map((src) => (
-            <img
-              key={src}
-              src={src}
-              alt={title}
-              className="rounded-xl shadow-lg max-h-[320px] w-auto object-contain"
-            />
-          ))}
-        </div>
-      )}
-
-      {/* text */}
-      <div className="max-w-4xl mx-auto text-center">
-        <p className="text-white/85 text-lg">{desc}</p>
-
-        {(built || focus) && (
-          <div className="mt-4 text-white/70">
-            {built && (
-              <div>
-                <span className="font-semibold text-white/80">Built with:</span>{" "}
-                {built}
-              </div>
-            )}
-            {focus && (
-              <div className="mt-1">
-                <span className="font-semibold text-white/80">Focus:</span>{" "}
-                {focus}
-              </div>
-            )}
-          </div>
-        )}
-
-        {cta && ctaHref && (
-          <a
-            href={ctaHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block mt-6 px-5 py-2 rounded-full border-2 border-teal text-white font-semibold hover:bg-teal/10 transition"
-          >
-            {cta}
-          </a>
-        )}
-      </div>
-    </Reveal>
-  );
-}
-
-/* =========================================================
-   Data (icons live in /public/icons)
-   ========================================================= */
+/* -------------------------------------------
+   Skills data (filenames must exist in /public)
+--------------------------------------------*/
 const LANGUAGES = [
   { label: "SQL", file: "sql.png" },
   { label: "Python", file: "python.png" },
@@ -183,35 +65,116 @@ const METHODS = [
   "Predictive Modelling",
 ];
 
-/* =========================================================
-   APP
-   ========================================================= */
+/* -------------------------------------------
+   Projects
+   (images must exist in /public/projects)
+--------------------------------------------*/
+const PROJECTS = [
+  {
+    num: "01",
+    title: "DQ-AI — Data Quality Auditor",
+    tagLine:
+      "A free web app that speeds up data cleaning. Upload a CSV/XLSX, hit Run Audit, and get a structured HTML report showing missing values, duplicates, outliers, invalid emails/postcodes, rare categories, type drift, and more.",
+    built: "Python, Dash, Pandas, Plotly",
+    focus: "Data cleaning, quality assurance",
+    images: ["/projects/dqai.png"], // image (we dropped live embed for mobile reliability)
+    buttons: [{ label: "Open App", href: "https://dq-ai.onrender.com/" }],
+  },
+  {
+    num: "02",
+    title: "Logistics Performance Dashboard",
+    tagLine:
+      "An advanced logistics dashboard featuring a Python-powered recommendation tool. Analyses historical shipment data to recommend the most efficient carriers per route.",
+    built: "Power BI, Python, DAX",
+    focus: "KPI design, routing recommendations, stakeholder reporting",
+    images: ["/projects/logistics.png", "/projects/logistics-2.png"],
+  },
+  {
+    num: "03",
+    title: "Automated Sales Report Generator",
+    tagLine:
+      "A Python script that automates the analysis workflow: load raw sales data, clean it, generate visuals, build a SARIMA forecast, and export a multi-page PDF report.",
+    built: "Python, Pandas, Matplotlib, Statsmodels",
+    focus: "Automation, forecasting, reproducible reporting",
+    images: [
+      "/projects/sales-report.png",
+      "/projects/sales-report2.png",
+      "/projects/sales-report3.png",
+    ],
+    buttons: [
+      {
+        label: "View on GitHub",
+        href: "https://github.com/Shanlw440/Python-pdf",
+      },
+    ],
+  },
+  {
+    num: "04",
+    title: "SQL Customer Churn Analysis",
+    tagLine:
+      "A SQL deep-dive into telecom churn. Segments customers by contract type, services, and tenure to flag high-risk groups and build churn profiles for strategy.",
+    built: "SQL (SQLite/Postgres)",
+    focus: "Churn analysis, segmentation, business storytelling",
+    images: ["/projects/churn1.png", "/projects/churn2.png"],
+    buttons: [
+      {
+        label: "View on GitHub",
+        href: "https://github.com/Shanlw440/sql-telecom-churn-analysis",
+      },
+    ],
+  },
+];
+
+/* -------------------------------------------
+   Certificates
+   pngs show as thumbnails; pdfs are link buttons.
+--------------------------------------------*/
+const CERTS = [
+  { type: "img", src: "/certificates/excel.png", alt: "Excel" },
+  { type: "img", src: "/certificates/Excel_CodeCademy.png", alt: "Excel (Codecademy)" },
+  { type: "img", src: "/certificates/powerbi.png", alt: "Power BI" },
+  { type: "pdf", href: "/certificates/Powerbi.pdf", label: "Power BI (PDF)" },
+  { type: "img", src: "/certificates/python.png", alt: "Python" },
+  { type: "img", src: "/certificates/pythonda.png", alt: "Python for Data Analysis (img)" },
+  { type: "pdf", href: "/certificates/Python_Essentials.pdf", label: "Python Essentials (PDF)" },
+  { type: "pdf", href: "/certificates/Python_for_Data_Analysis.pdf", label: "Python for Data Analysis (PDF)" },
+  { type: "img", src: "/certificates/SQL.png", alt: "SQL" },
+  { type: "img", src: "/certificates/sql1.png", alt: "SQL (2)" },
+  { type: "img", src: "/certificates/stats.png", alt: "Statistics" },
+  { type: "img", src: "/certificates/tableau.png", alt: "Tableau" },
+  { type: "pdf", href: "/certificates/Tableau.pdf", label: "Tableau (PDF)" },
+  { type: "pdf", href: "/certificates/Essential_Statistics.pdf", label: "Essential Statistics (PDF)" },
+  { type: "pdf", href: "/certificates/Excel.pdf", label: "Excel (PDF)" },
+];
+
+/* -------------------------------------------
+   App
+--------------------------------------------*/
 export default function App() {
+  useEffect(() => {
+    AOS.init({
+      duration: 700,
+      easing: "ease-out-quart",
+      once: true,
+      offset: 80,
+    });
+  }, []);
+
   return (
     <div className="min-h-screen bg-navy text-white">
       {/* NAVBAR */}
       <header className="sticky top-0 z-40 bg-navy/95 backdrop-blur border-b border-ink">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="flex h-20 items-center justify-between">
+          <div className="flex h-16 sm:h-20 items-center justify-between">
             <a href="#home" className="text-2xl font-extrabold tracking-tight">
               Shannon Wise
             </a>
             <nav className="hidden sm:flex items-center gap-12 text-[15px] font-semibold">
-              <a href="#about" className="hover:text-teal">
-                About Me
-              </a>
-              <a href="#skills" className="hover:text-teal">
-                Skills
-              </a>
-              <a href="#projects" className="hover:text-teal">
-                Projects
-              </a>
-              <a href="#certificates" className="hover:text-teal">
-                Certificates
-              </a>
-              <a href="#contact" className="hover:text-teal">
-                Contact
-              </a>
+              <a href="#about" className="hover:text-teal">About Me</a>
+              <a href="#skills" className="hover:text-teal">Skills</a>
+              <a href="#projects" className="hover:text-teal">Projects</a>
+              <a href="#certificates" className="hover:text-teal">Certificates</a>
+              <a href="#contact" className="hover:text-teal">Contact</a>
             </nav>
           </div>
         </div>
@@ -219,14 +182,15 @@ export default function App() {
 
       {/* ====================== HERO ====================== */}
       <section id="home" aria-label="Intro">
-        <div className="relative max-w-6xl mx-auto px-6 py-24 lg:py-28">
-          <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-14 items-center">
-            {/* LEFT: badge + name + tagline */}
-            <Reveal className="relative">
+        <div className="relative max-w-6xl mx-auto px-6 py-20 sm:py-22 lg:py-28">
+          {/* two columns from small screens up */}
+          <div className="grid sm:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-14 items-center" data-aos="fade-up">
+            {/* LEFT */}
+            <div className="relative order-1 sm:order-none">
               <div className="relative inline-block">
                 <h1
                   className="font-extrabold leading-[0.9]
-                             text-[clamp(48px,8.8vw,120px)]
+                             text-[clamp(46px,10vw,120px)]
                              font-[var(--font-display)] tracking-tight"
                 >
                   SHANNON
@@ -234,33 +198,36 @@ export default function App() {
                   <span className="text-teal">WISE</span>
                 </h1>
 
-                {/* Outlined badge above “NNON” */}
-                <div className="absolute -top-12 right-[12%]">
-                  <span className="px-5 py-1.5 rounded-full text-[11px] tracking-[0.25em] border-2 border-teal flex gap-1 items-center justify-center">
+                {/* badge above NNON */}
+                <div className="absolute -top-10 sm:-top-12 right-0 sm:right-[12%]">
+                  <span
+                    className="px-5 py-2 rounded-full text-[11px] sm:text-[12px] tracking-[0.25em]
+                               border-2 border-teal flex gap-1 items-center justify-center
+                               bg-navy/70 backdrop-blur"
+                  >
                     <span className="text-teal font-bold">DATA ANALYST</span>
                     <span className="text-white font-bold">PORTFOLIO</span>
                   </span>
                 </div>
               </div>
 
-              {/* Tagline */}
-              <p className="mt-10 text-[clamp(16px,2.1vw,22px)] text-white/80 max-w-2xl">
+              <p className="mt-8 sm:mt-10 text-[clamp(16px,2.2vw,22px)] text-white/80 max-w-2xl text-balance">
                 Finding patterns in the noise, one dataset at a time.
               </p>
-            </Reveal>
+            </div>
 
-            {/* RIGHT: portrait PNG */}
-            <Reveal className="flex justify-center lg:justify-end">
+            {/* RIGHT image */}
+            <div className="flex justify-center sm:justify-end">
               <img
                 src="/shannon_circle_transparent.png"
                 alt="Shannon Wise"
-                className="max-w-[520px] w-full h-auto drop-shadow-[0_30px_100px_rgba(0,0,0,0.45)] lg:-translate-x-6"
+                className="w-[70vw] max-w-[320px] sm:max-w-[380px] md:max-w-[460px] lg:max-w-[520px] h-auto
+                           drop-shadow-[0_30px_100px_rgba(0,0,0,0.45)] sm:-translate-x-2 lg:-translate-x-6"
               />
-            </Reveal>
+            </div>
           </div>
 
-          {/* Scroll Indicator */}
-          <div className="flex justify-center pt-10 lg:pt-16">
+          <div className="flex justify-center pt-8 sm:pt-10 lg:pt-16">
             <span className="animate-bounce text-teal text-3xl" aria-hidden>
               ⌄
             </span>
@@ -271,16 +238,14 @@ export default function App() {
       {/* ====================== ABOUT ====================== */}
       <section id="about" className="border-t border-ink/30">
         <div className="max-w-6xl mx-auto px-6 py-20 lg:py-24">
-          <div className="grid gap-12 lg:grid-cols-2 items-center">
-            {/* LEFT: headline */}
-            <Reveal className="flex items-center">
+          <div className="grid gap-12 lg:grid-cols-2 items-center" data-aos="fade-up">
+            <div className="flex items-center">
               <h2 className="text-[clamp(36px,6.5vw,84px)] leading-[1] font-[var(--font-display)] font-extrabold">
                 Hi, I’m <span className="text-teal">Shannon</span>!
               </h2>
-            </Reveal>
+            </div>
 
-            {/* RIGHT: body copy */}
-            <Reveal className="text-[clamp(16px,1.6vw,18px)] leading-snug text-white/85 space-y-4" delay={80}>
+            <div className="text-[clamp(16px,1.6vw,18px)] leading-snug text-white/85 space-y-4">
               <p>
                 I’m a <span className="text-teal">Data Analyst</span> in the
                 <span className="text-teal"> telecoms industry</span>, where I transform complex datasets into insights
@@ -310,313 +275,262 @@ export default function App() {
                 <span className="text-teal"> creative problem-solving</span>, using data not just to explain the past,
                 but to shape the future.
               </p>
-            </Reveal>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ====================== TECHNICAL SKILLS ====================== */}
-<section id="skills" className="border-t border-ink/30">
-  <div className="max-w-6xl mx-auto px-6 py-20 lg:py-24">
-    {/* Center pill only */}
-    <div className="mb-10 flex justify-center">
-      <Reveal>
-        <Pill>Technical Skills</Pill>
-      </Reveal>
-    </div>
+      {/* ====================== SKILLS ====================== */}
+      <section id="skills" className="border-t border-ink/30">
+        <div className="max-w-6xl mx-auto px-6 py-20 lg:py-24" data-aos="fade-up">
+          <Pill>TECHNICAL SKILLS</Pill>
 
-    {/* Main four columns (keep original left alignment) */}
-    <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 lg:gap-10 relative">
-      {/* Column 1: Languages */}
-      <div className="relative">
-        <Reveal>
-          <h3 className="text-teal font-extrabold text-3xl font-[var(--font-display)]">
-            Programming
-          </h3>
-          <div className="text-white font-extrabold text-3xl font-[var(--font-display)] -mt-1">
-            Languages
-          </div>
-          <ul className="mt-8 space-y-6">
-            {LANGUAGES.map((item) => (
-              <li key={item.label} className="flex items-center gap-4">
-                <IconDiscImg src={`/icons/${item.file}`} alt={item.label} />
-                <span className="text-lg">{item.label}</span>
-              </li>
-            ))}
-          </ul>
-        </Reveal>
-        <div className="hidden lg:block absolute right-[-20px] top-0 bottom-0 w-px bg-white/25" />
-      </div>
+          {/* 2 columns on small, 4 on large */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-10 relative">
+            {/* Column 1 */}
+            <div className="relative">
+              <h3 className="text-teal font-extrabold text-3xl font-[var(--font-display)]">Programming</h3>
+              <div className="text-white font-extrabold text-3xl font-[var(--font-display)] -mt-1">Languages</div>
+              <ul className="mt-8 space-y-6">
+                {LANGUAGES.map((item) => (
+                  <li key={item.label} className="flex items-center gap-4">
+                    <IconDiscImg src={`/icons/${item.file}`} alt={item.label} />
+                    <span className="text-lg">{item.label}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="hidden lg:block absolute right-[-20px] top-0 bottom-0 w-px bg-white/25" />
+            </div>
 
-      {/* Column 2: Tools */}
-      <div className="relative">
-        <Reveal delay={70}>
-          <h3 className="text-teal font-extrabold text-3xl font-[var(--font-display)]">
-            Data Analytic
-          </h3>
-          <div className="text-white font-extrabold text-3xl font-[var(--font-display)] -mt-1">
-            Tools
-          </div>
-          <ul className="mt-8 space-y-6">
-            {TOOLS.map((item) => (
-              <li key={item.label} className="flex items-center gap-4">
-                <IconDiscImg src={`/icons/${item.file}`} alt={item.label} />
-                <span className="text-lg">{item.label}</span>
-              </li>
-            ))}
-          </ul>
-        </Reveal>
-        <div className="hidden lg:block absolute right-[-20px] top-0 bottom-0 w-px bg-white/25" />
-      </div>
+            {/* Column 2 */}
+            <div className="relative">
+              <h3 className="text-teal font-extrabold text-3xl font-[var(--font-display)]">Data Analytic</h3>
+              <div className="text-white font-extrabold text-3xl font-[var(--font-display)] -mt-1">Tools</div>
+              <ul className="mt-8 space-y-6">
+                {TOOLS.map((item) => (
+                  <li key={item.label} className="flex items-center gap-4">
+                    <IconDiscImg src={`/icons/${item.file}`} alt={item.label} />
+                    <span className="text-lg">{item.label}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="hidden lg:block absolute right-[-20px] top-0 bottom-0 w-px bg-white/25" />
+            </div>
 
-      {/* Column 3: Viz */}
-      <div className="relative">
-        <Reveal delay={140}>
-          <h3 className="text-teal font-extrabold text-3xl font-[var(--font-display)]">
-            Data Visualization
-          </h3>
-          <div className="text-white font-extrabold text-3xl font-[var(--font-display)] -mt-1">
-            Tools
-          </div>
-          <ul className="mt-8 space-y-6">
-            {VIZ.map((item) => (
-              <li key={item.label} className="flex items-center gap-4">
-                <IconDiscImg src={`/icons/${item.file}`} alt={item.label} />
-                <span className="text-lg">{item.label}</span>
-              </li>
-            ))}
-          </ul>
-        </Reveal>
-        <div className="hidden lg:block absolute right-[-20px] top-0 bottom-0 w-px bg-white/25" />
-      </div>
+            {/* Column 3 */}
+            <div className="relative">
+              <h3 className="text-teal font-extrabold text-3xl font-[var(--font-display)]">Data Visualization</h3>
+              <div className="text-white font-extrabold text-3xl font-[var(--font-display)] -mt-1">Tools</div>
+              <ul className="mt-8 space-y-6">
+                {VIZ.map((item) => (
+                  <li key={item.label} className="flex items-center gap-4">
+                    <IconDiscImg src={`/icons/${item.file}`} alt={item.label} />
+                    <span className="text-lg">{item.label}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="hidden lg:block absolute right-[-20px] top-0 bottom-0 w-px bg-white/25" />
+            </div>
 
-      {/* Column 4: Methods (no icons) */}
-      <div className="relative">
-        <Reveal delay={210}>
-          <h3 className="text-teal font-extrabold text-3xl font-[var(--font-display)]">
-            Data Analytic
-          </h3>
-          <div className="text-white font-extrabold text-3xl font-[var(--font-display)] -mt-1">
-            Methods
+            {/* Column 4 */}
+            <div className="relative">
+              <h3 className="text-teal font-extrabold text-3xl font-[var(--font-display)]">Data Analytic</h3>
+              <div className="text-white font-extrabold text-3xl font-[var(--font-display)] -mt-1">Methods</div>
+              <div className="mt-8 space-y-2.5 text-white/90 text-[15px]">
+                {METHODS.map((m) => (
+                  <div key={m}>{m}</div>
+                ))}
+              </div>
+            </div>
           </div>
-          <div className="mt-8 space-y-2.5 text-white/90 text-[15px]">
-            {METHODS.map((m) => (
-              <div key={m}>{m}</div>
-            ))}
-          </div>
-        </Reveal>
-      </div>
-    </div>
-  </div>
-</section>
 
+          {/* Extras */}
+          <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" data-aos="fade-up">
+            <div className="rounded-2xl border border-white/15 p-5">
+              <div className="text-teal font-[var(--font-display)] font-extrabold text-xl">
+                Data Science & ML
+              </div>
+              <ul className="mt-4 space-y-2 text-white/90">
+                <li>scikit-learn (classification, regression, clustering)</li>
+                <li>Feature engineering & model evaluation</li>
+                <li>Hyperparameter tuning</li>
+                <li>NLP basics (text cleaning, keyword extraction)</li>
+              </ul>
+            </div>
+
+            <div className="rounded-2xl border border-white/15 p-5">
+              <div className="text-teal font-[var(--font-display)] font-extrabold text-xl">
+                Data Collection
+              </div>
+              <ul className="mt-4 space-y-2 text-white/90">
+                <li>Web scraping (Requests, BeautifulSoup, Selenium)</li>
+                <li>APIs (REST/JSON, auth, pagination)</li>
+              </ul>
+            </div>
+
+            <div className="rounded-2xl border border-white/15 p-5">
+              <div className="text-teal font-[var(--font-display)] font-extrabold text-xl">
+                Databases & Platforms
+              </div>
+              <ul className="mt-4 space-y-2 text-white/90">
+                <li>PostgreSQL / SQL Server</li>
+                <li>Snowflake</li>
+                <li>SharePoint / OneDrive data sources</li>
+              </ul>
+            </div>
+
+            <div className="rounded-2xl border border-white/15 p-5">
+              <div className="text-teal font-[var(--font-display)] font-extrabold text-xl">
+                Workflow & Collaboration
+              </div>
+              <ul className="mt-4 space-y-2 text-white/90">
+                <li>Git & GitHub</li>
+                <li>Jupyter / Notebooks</li>
+                <li>Documentation & reproducibility</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* ====================== PROJECTS ====================== */}
       <section id="projects" className="border-t border-ink/30">
         <div className="max-w-6xl mx-auto px-6 py-20 lg:py-24">
-          <div className="mb-10 flex justify-center">
-            <Reveal>
-              <Pill>Notable Projects</Pill>
-            </Reveal>
+          <Pill>NOTABLE PROJECTS</Pill>
+
+          <div className="space-y-20">
+            {PROJECTS.map((p) => (
+              <article key={p.num} className="space-y-6" data-aos="fade-up">
+                {/* header row */}
+                <div className="flex items-baseline gap-4">
+                  <div className="text-5xl sm:text-6xl font-extrabold text-white/95">{p.num}</div>
+                  <h3 className="text-2xl sm:text-3xl lg:text-4xl font-[var(--font-display)] font-extrabold text-teal">
+                    {p.title}
+                  </h3>
+                </div>
+
+                {/* images */}
+                {p.images?.length > 0 && (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    {p.images.map((img, i) => (
+                      <img
+                        key={i}
+                        src={img}
+                        alt={p.title}
+                        className="mx-auto w-full rounded-2xl border border-white/10 object-contain
+                                   max-w-[980px] sm:max-w-full"
+                      />
+                    ))}
+                  </div>
+                )}
+
+                {/* description */}
+                <p className="text-white/90 text-lg">{p.tagLine}</p>
+
+                {/* built/focus */}
+                <div className="text-white/90">
+                  <span className="font-semibold">Built with:</span> {p.built}
+                  <span className="mx-2"> | </span>
+                  <span className="font-semibold">Focus:</span> {p.focus}
+                </div>
+
+                {/* buttons */}
+                {p.buttons && p.buttons.length > 0 && (
+                  <div className="pt-2 flex flex-wrap gap-3">
+                    {p.buttons.map((b) => (
+                      <a
+                        key={b.href}
+                        href={b.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center px-4 py-2 rounded-xl border border-white/20
+                                   hover:border-white/40 hover:bg-white/5 transition"
+                      >
+                        {b.label}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </article>
+            ))}
           </div>
-
-          <ProjectRow
-            no={1}
-            title="DQ-AI — Data Quality Auditor"
-            images={["/projects/dqai.png"]}
-            desc="A free web app that speeds up data cleaning. Upload a CSV/XLSX, hit Run Audit, and get a structured HTML report showing missing values, duplicates, outliers, invalid emails/postcodes, rare categories, type drift, and more."
-            built="Python, Dash, Pandas, Plotly"
-            focus="Data cleaning, quality assurance"
-            cta="Open App"
-            ctaHref="https://dq-ai.onrender.com/"
-          />
-
-          <ProjectRow
-            no={2}
-            title="Logistics Performance Dashboard"
-            images={["/projects/logistics-1.png"]}
-            desc="An advanced logistics dashboard featuring a Python-powered recommendation tool. Analyses historical shipment data to recommend the most efficient carriers per route."
-            built="Power BI, Python, DAX"
-            focus="KPI design, routing recommendations, stakeholder reporting"
-          />
-
-          <ProjectRow
-            no={3}
-            title="Automated Sales Report Generator"
-            images={["/projects/sales-report.png", "/projects/sales-report2.png", "/projects/sales-report3.png"]}
-            desc="A Python script that automates the analysis workflow: loads raw sales data, cleans it, generates visuals, fits a SARIMA forecast, and exports a multi-page PDF."
-            built="Python, Pandas, Matplotlib, Statsmodels"
-            focus="Automation, forecasting, reporting"
-            cta="View on GitHub"
-            ctaHref="https://github.com/Shanlw440/Python-pdf"
-          />
-
-          <ProjectRow
-            no={4}
-            title="SQL Customer Churn Analysis"
-            images={["/projects/churn1.png", "/projects/churn2.png"]}
-            desc="A deep-dive into telecom churn. Segments customers by contract type, services, and tenure to flag high-risk groups and build churn profiles for strategy."
-            built="SQL (SQLite/Postgres)"
-            focus="Churn analysis, segmentation, business storytelling"
-            cta="View on GitHub"
-            ctaHref="https://github.com/Shanlw440/sql-telecom-churn-analysis"
-            last
-          />
         </div>
       </section>
 
       {/* ====================== CERTIFICATES ====================== */}
       <section id="certificates" className="border-t border-ink/30">
-        <div className="max-w-6xl mx-auto px-6 py-20 lg:py-24 text-center">
-          <div className="mb-10 flex justify-center">
-            <Reveal>
-              <Pill>Certificates</Pill>
-            </Reveal>
+        <div className="max-w-6xl mx-auto px-6 py-20 lg:py-24" data-aos="fade-up">
+          <Pill>CERTIFICATES</Pill>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 place-items-center">
+            {CERTS.map((c, idx) =>
+              c.type === "img" ? (
+                <img
+                  key={idx}
+                  src={c.src}
+                  alt={c.alt || "Certificate"}
+                  className="w-full max-w-[220px] rounded-xl border border-white/10 object-contain"
+                />
+              ) : (
+                <a
+                  key={idx}
+                  href={c.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-full max-w-[220px] rounded-xl border border-white/10 p-4 text-center
+                             hover:bg-white/5 transition"
+                >
+                  {c.label || "View PDF"}
+                </a>
+              )
+            )}
           </div>
-
-          <Reveal className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8 justify-items-center">
-            <a href="/certificates/Excel.pdf" target="_blank" rel="noopener noreferrer">
-              <img
-                src="/certificates/excel.png"
-                alt="Excel"
-                className="h-40 object-contain rounded-lg shadow-md hover:scale-105 transition"
-              />
-            </a>
-
-            <img
-              src="/certificates/Excel_CodeCademy.png"
-              alt="Excel Codecademy"
-              className="h-40 object-contain rounded-lg shadow-md hover:scale-105 transition"
-            />
-
-            <a href="/certificates/Powerbi.pdf" target="_blank" rel="noopener noreferrer">
-              <img
-                src="/certificates/powerbi.png"
-                alt="Power BI"
-                className="h-40 object-contain rounded-lg shadow-md hover:scale-105 transition"
-              />
-            </a>
-
-            <img
-              src="/certificates/python.png"
-              alt="Python"
-              className="h-40 object-contain rounded-lg shadow-md hover:scale-105 transition"
-            />
-
-            <a href="/certificates/Python_Essentials.pdf" target="_blank" rel="noopener noreferrer">
-              <img
-                src="/certificates/pythonda.png"
-                alt="Python Essentials"
-                className="h-40 object-contain rounded-lg shadow-md hover:scale-105 transition"
-              />
-            </a>
-
-            <a href="/certificates/Python_for_Data_Analysis.pdf" target="_blank" rel="noopener noreferrer">
-              <img
-                src="/certificates/pythonda.png"
-                alt="Python for Data Analysis"
-                className="h-40 object-contain rounded-lg shadow-md hover:scale-105 transition"
-              />
-            </a>
-
-            <img
-              src="/certificates/SQL.png"
-              alt="SQL"
-              className="h-40 object-contain rounded-lg shadow-md hover:scale-105 transition"
-            />
-
-            <img
-              src="/certificates/sql1.png"
-              alt="SQL (course)"
-              className="h-40 object-contain rounded-lg shadow-md hover:scale-105 transition"
-            />
-
-            <a href="/certificates/Essential_Statistics.pdf" target="_blank" rel="noopener noreferrer">
-              <img
-                src="/certificates/stats.png"
-                alt="Statistics"
-                className="h-40 object-contain rounded-lg shadow-md hover:scale-105 transition"
-              />
-            </a>
-
-            <a href="/certificates/Tableau.pdf" target="_blank" rel="noopener noreferrer">
-              <img
-                src="/certificates/tableau.png"
-                alt="Tableau"
-                className="h-40 object-contain rounded-lg shadow-md hover:scale-105 transition"
-              />
-            </a>
-          </Reveal>
         </div>
       </section>
 
       {/* ====================== CONTACT ====================== */}
       <section id="contact" className="border-t border-ink/30">
-        <div className="max-w-6xl mx-auto px-6 py-20 lg:py-24">
-          <div className="mb-10 flex justify-center">
-            <Reveal>
-              <Pill>Contact</Pill>
-            </Reveal>
-          </div>
+        <div className="max-w-6xl mx-auto px-6 py-20 lg:py-24" data-aos="fade-up">
+          <Pill>CONTACT</Pill>
 
-          <div className="grid gap-12 lg:grid-cols-2 items-center">
-            {/* Left: methods */}
-            <Reveal className="space-y-8">
-              {/* Email */}
-              <a
-                href="mailto:s.wise11@hotmail.co.uk"
-                className="group flex items-center gap-4"
-              >
-                <span className="inline-flex items-center justify-center w-14 h-14 rounded-full border-2 border-teal text-white">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="w-7 h-7">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.6" d="M3 8l9 6 9-6M5 6h14a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2z" />
-                  </svg>
-                </span>
-                <div>
-                  <div className="text-sm uppercase tracking-widest text-white/60">E-mail</div>
-                  <div className="text-lg font-semibold group-hover:text-teal transition">
-                    s.wise11@hotmail.co.uk
-                  </div>
-                </div>
-              </a>
-
-              {/* LinkedIn */}
-              <a
-                href="https://www.linkedin.com/in/shannonwise95"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center gap-4"
-              >
-                <span className="inline-flex items-center justify-center w-14 h-14 rounded-full border-2 border-teal text-white">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7">
-                    <path d="M4.983 3.5C4.983 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.483 1.12 2.483 2.5zM.25 8.25h4.5v15.5H.25V8.25zM8.5 8.25h4.312v2.117h.062c.6-1.137 2.062-2.337 4.25-2.337 4.55 0 5.387 2.992 5.387 6.882v8.838h-4.5v-7.83c0-1.867-.033-4.267-2.6-4.267-2.6 0-3 2.03-3 4.127v7.97H8.5V8.25z" />
-                  </svg>
-                </span>
-                <div>
-                  <div className="text-sm uppercase tracking-widest text-white/60">
-                    LinkedIn
-                  </div>
-                  <div className="text-lg font-semibold group-hover:text-teal transition">
-                    linkedin.com/in/shannonwise95
-                  </div>
-                </div>
-              </a>
-            </Reveal>
-
-            {/* Right: slogan */}
-            <Reveal className="text-left lg:text-right" delay={100}>
-              <h3 className="font-[var(--font-display)] font-extrabold leading-[1.1] text-[clamp(32px,6vw,60px)]">
-                <span className="text-white">Let’s </span>
-                <span className="text-teal">connect</span>
-                <span className="text-white"> and </span>
-                <span className="text-teal">work together</span>
-                <span className="text-white">!</span>
+          <div className="grid lg:grid-cols-2 gap-10 items-center">
+            <div className="space-y-4">
+              <h3 className="text-[clamp(28px,5.5vw,56px)] font-[var(--font-display)] font-extrabold leading-tight">
+                Let’s <span className="text-teal">connect</span> and
+                <br />
+                <span className="text-teal">work together</span>!
               </h3>
-              <p className="mt-4 text-white/75 text-lg max-w-xl lg:ml-auto">
-                Open to <span className="text-teal font-semibold">freelance</span> and short-term
-                contract projects dashboards, automation, and data products that people actually use.
+              <p className="text-white/85 text-lg">
+                Open to freelance and collaboration—drop me a line and let’s build something useful.
               </p>
-            </Reveal>
+
+              <div className="mt-4 space-y-3">
+                <div className="flex items-center gap-3">
+                  <span className="w-9 h-9 rounded-full bg-teal/20 flex items-center justify-center">✉️</span>
+                  <a href="mailto:s.wise11@hotmail.co.uk" className="hover:text-teal">
+                    s.wise11@hotmail.co.uk
+                  </a>
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className="w-9 h-9 rounded-full bg-teal/20 flex items-center justify-center">in</span>
+                  <a
+                    href="https://www.linkedin.com/in/shannonwise95"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="hover:text-teal"
+                  >
+                    linkedin.com/in/shannonwise95
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-white/10 p-6 bg-white/[0.02]">
+              <p className="text-white/80">
+                Prefer email? I usually reply within a day. If you’d like a quick chat, send a note with a couple of
+                time slots and I’ll share a calendar link.
+              </p>
+            </div>
           </div>
         </div>
       </section>
