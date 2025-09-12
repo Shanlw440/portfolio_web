@@ -117,13 +117,14 @@ export default function App() {
       <section id="home" aria-label="Intro">
         <div className="relative max-w-6xl mx-auto px-6 py-20 sm:py-22 lg:py-28">
           {/* 2 columns from small screens */}
-          <div className="flex flex-col sm:flex-row gap-10 lg:gap-14 items-center">
+          <div className="grid sm:grid-cols-2 gap-10 lg:gap-14 items-center">
             {/* LEFT: badge + name */}
             <div className="relative order-2 sm:order-1 flex-1">
-              <div className="relative inline-block">
+              <div className="relative">
                 <h1
-                  className="font-extrabold leading-[0.9] text-[clamp(46px,10vw,120px)]
-                                 font-[var(--font-display)] tracking-tight text-center sm:text-left"
+                  className="font-extrabold leading-[0.9]
+                             text-[clamp(46px,10vw,120px)]
+                             font-[var(--font-display)] tracking-tight text-center sm:text-left"
                 >
                   SHANNON
                   <br />
@@ -132,7 +133,7 @@ export default function App() {
                 <div className="absolute -top-10 sm:-top-12 right-0 sm:right-[12%]">
                   <span
                     className="px-5 py-2 rounded-full text-[11px] sm:text-[12px] tracking-[0.25em]
-                                 border-2 border-teal flex gap-1 items-center justify-center bg-navy/70 backdrop-blur"
+                             border-2 border-teal flex gap-1 items-center justify-center bg-navy/70 backdrop-blur"
                   >
                     <span className="text-teal font-bold">DATA ANALYST</span>
                     <span className="text-white font-bold">PORTFOLIO</span>
@@ -149,7 +150,7 @@ export default function App() {
                 src="/shannon_circle_transparent.png"
                 alt="Shannon Wise"
                 className="w-[70vw] max-w-[320px] sm:max-w-[380px] md:max-w-[460px] lg:max-w-[520px] h-auto
-                               drop-shadow-[0_30px_100px_rgba(0,0,0,0.45)] sm:-translate-x-2 lg:-translate-x-6"
+                           drop-shadow-[0_30px_100px_rgba(0,0,0,0.45)] sm:-translate-x-2 lg:-translate-x-6"
               />
             </div>
           </div>
@@ -197,7 +198,8 @@ export default function App() {
               Technical Skills
             </span>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 lg:gap-10 relative">
+          {/* Adjusted grid to be 2 columns from small screens and 4 on large */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-10 relative">
             {/* Languages */}
             <div className="relative">
               <h3 className="text-teal font-extrabold text-3xl">Programming</h3>
@@ -269,14 +271,14 @@ export default function App() {
                   <span className="text-white text-4xl md:text-5xl">{p.num}</span>
                   <span className="text-teal uppercase">{p.title}</span>
                 </h3>
-                <div className="mt-6 flex flex-wrap justify-center gap-4">
+                {/* Changed this div to use grid on larger screens */}
+                <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
                   {p.images.map((img, i) => (
                     <img
                       key={i}
                       src={img}
                       alt={p.title}
-                      className="mx-auto w-full max-w-[980px] sm:max-w-[620px] md:max-w-[760px]
-                                     rounded-2xl border border-white/10 object-contain"
+                      className="mx-auto w-full max-w-full rounded-2xl border border-white/10 object-contain"
                     />
                   ))}
                 </div>
