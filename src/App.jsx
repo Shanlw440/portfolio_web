@@ -13,12 +13,11 @@ function IconDiscImg({ src, alt = "" }) {
   );
 }
 
-/* Helper: responsive image sizing by count */
+/* Helper: responsive image sizing by count (desktop tuned) */
 function projectImgClass(count) {
-  // Phone: full width; Tablet: two per row; Desktop: larger
-  if (count === 1) return "w-full lg:w-[85%]";
-  if (count === 2) return "w-full sm:w-[48%] lg:w-[45%]";
-  return "w-full sm:w-[48%] lg:w-[30%]"; // 3+
+  if (count === 1) return "w-full lg:w-[75%]";        // Project 1 smaller on desktop
+  if (count === 2) return "w-full sm:w-[48%] lg:w-[45%]"; // 2 images larger on desktop
+  return "w-full sm:w-[48%] lg:w-[30%]";              // 3+ images
 }
 
 /* ====================== DATA ====================== */
@@ -95,8 +94,8 @@ const PROJECTS = [
     title: "SQL Customer Churn Analysis",
     tagLine:
       "A deep-dive into telecom churn. Segments customers by contract type, services, and tenure to flag high-risk groups and build churn profiles for strategy.",
-    built: "SQL (SQLite/Postgres)",
-    focus: "Churn analysis, segmentation, business storytelling",
+    built: "SQL, Power BI",
+    focus: "Retention analytics, churn risk modelling",
     images: ["/projects/churn1.png", "/projects/churn2.png"],
     buttons: [
       {
@@ -115,7 +114,11 @@ export default function App() {
       <header className="sticky top-0 z-40 bg-navy/95 backdrop-blur border-b border-ink">
         <div className="max-w-6xl mx-auto px-6">
           <div className="flex h-20 items-center justify-between">
-            <a href="#home" className="text-2xl font-extrabold tracking-tight">
+            {/* Center brand on mobile, left on desktop */}
+            <a
+              href="#home"
+              className="text-2xl font-extrabold tracking-tight mx-auto sm:mx-0"
+            >
               Shannon Wise
             </a>
             <nav className="hidden sm:flex items-center gap-12 text-[15px] font-semibold">
@@ -131,27 +134,15 @@ export default function App() {
 
       {/* ====================== HERO ====================== */}
       <section id="home" aria-label="Intro">
-        <div className="relative max-w-6xl mx-auto px-6 py-20 sm:py-22 lg:py-28">
-          {/* Phone: 1 col, image first. From sm+: 2 cols. */}
-          <div className="grid grid-cols-1 sm:grid-cols-[1.1fr_0.9fr] gap-6 sm:gap-10 lg:gap-14 items-center">
-            {/* Image first on phone */}
-            <div className="order-1 sm:order-2 flex justify-center sm:justify-end">
-              <img
-                src="/shannon_circle_transparent.png"
-                alt="Shannon Wise"
-                className="w-[78vw] max-w-[340px] sm:max-w-[380px] md:max-w-[460px] lg:max-w-[520px] h-auto
-                           drop-shadow-[0_30px_100px_rgba(0,0,0,0.45)] sm:-translate-x-2 lg:-translate-x-6"
-              />
-            </div>
-
-            {/* Text second on phone */}
-            <div className="order-2 sm:order-1 relative">
-              {/* Pill ABOVE the name on all screens */}
-              <div className="mb-4 sm:mb-5 flex sm:block sm:justify-start justify-center">
+        <div className="relative max-w-6xl mx-auto px-6 py-24 lg:py-28">
+          <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-14 items-center">
+            {/* LEFT: pill + name + tagline (center on mobile, left on desktop) */}
+            <div className="relative text-center lg:text-left">
+              {/* Pill ABOVE name, centered on mobile, inline on desktop */}
+              <div className="mb-4 lg:mb-5 flex justify-center lg:justify-start">
                 <span
-                  className="px-5 py-1.5 rounded-full text-[11px] tracking-[0.25em]
-                             border-2 border-teal bg-navy/70 backdrop-blur
-                             flex gap-1 items-center justify-center"
+                  className="inline-flex px-5 py-1.5 rounded-full text-[11px] tracking-[0.25em]
+                             border-2 border-teal gap-1 items-center justify-center"
                 >
                   <span className="text-teal font-bold">DATA ANALYST</span>
                   <span className="text-white font-bold">PORTFOLIO</span>
@@ -161,7 +152,7 @@ export default function App() {
               <div className="relative inline-block">
                 <h1
                   className="font-extrabold leading-[0.9]
-                             text-[clamp(40px,10vw,120px)]
+                             text-[clamp(48px,8.8vw,120px)]
                              font-[var(--font-display)] tracking-tight"
                 >
                   SHANNON
@@ -170,15 +161,24 @@ export default function App() {
                 </h1>
               </div>
 
-              {/* Tagline centered on phone */}
-              <p className="mt-6 sm:mt-8 text-[clamp(16px,2.2vw,22px)] text-white/80 max-w-2xl text-center sm:text-left">
+              {/* Tagline */}
+              <p className="mt-6 lg:mt-8 text-[clamp(16px,2.1vw,22px)] text-white/80 max-w-2xl mx-auto lg:mx-0">
                 Finding patterns in the noise, one dataset at a time.
               </p>
+            </div>
+
+            {/* RIGHT: portrait PNG */}
+            <div className="flex justify-center lg:justify-end">
+              <img
+                src="/shannon_circle_transparent.png"
+                alt="Shannon Wise"
+                className="max-w-[520px] w-full h-auto drop-shadow-[0_30px_100px_rgba(0,0,0,0.45)] lg:-translate-x-6"
+              />
             </div>
           </div>
 
           {/* Scroll Indicator */}
-          <div className="flex justify-center pt-8 sm:pt-10 lg:pt-16">
+          <div className="flex justify-center pt-10 lg:pt-16">
             <span className="animate-bounce text-teal text-3xl" aria-hidden>
               ⌄
             </span>
@@ -191,7 +191,7 @@ export default function App() {
         <div className="max-w-6xl mx-auto px-6 py-20 lg:py-24">
           <div className="grid gap-12 lg:grid-cols-2 items-center">
             <div className="flex items-center">
-              <h2 className="text-[clamp(36px,6.5vw,84px)] leading-[1] font-[var(--font-display)] font-extrabold">
+              <h2 className="text-[clamp(36px,6.5vw,84px)] leading-[1] font-[var(--font-display)] font-extrabold text-center lg:text-left">
                 Hi, I’m <span className="text-teal">Shannon</span>!
               </h2>
             </div>
@@ -240,7 +240,7 @@ export default function App() {
             </span>
           </div>
 
-          {/* Mobile: rows with item dividers; Desktop: no item dividers, use column separators */}
+          {/* Mobile: rows with item dividers; Desktop: column separators */}
           <div className="lg:grid lg:grid-cols-4 lg:gap-10">
             {/* Languages */}
             <div className="border-t border-white/15 pt-6 lg:border-t-0 lg:pt-0 lg:border-r lg:border-white/15">
@@ -497,8 +497,8 @@ export default function App() {
               </a>
             </div>
 
-            {/* Right: slogan */}
-            <div className="text-left lg:text-right">
+            {/* Right: slogan — centered on mobile, right on desktop */}
+            <div className="text-center lg:text-right">
               <h3 className="font-[var(--font-display)] font-extrabold leading-[1.1] text-[clamp(32px,6vw,60px)]">
                 <span className="text-white">Let’s </span>
                 <span className="text-teal">connect</span>
@@ -506,7 +506,7 @@ export default function App() {
                 <span className="text-teal">work together</span>
                 <span className="text-white">!</span>
               </h3>
-              <p className="mt-4 text-white/75 text-lg max-w-xl lg:ml-auto">
+              <p className="mt-4 text-white/75 text-lg max-w-xl mx-auto lg:mx-0 lg:ml-auto">
                 Open to <span className="text-teal font-semibold">freelance</span> and short-term
                 contract projects—dashboards, automation, and data products that people actually use.
               </p>
