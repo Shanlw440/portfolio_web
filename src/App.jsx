@@ -13,6 +13,14 @@ function IconDiscImg({ src, alt = "" }) {
   );
 }
 
+/* Helper: responsive image sizing by count */
+function projectImgClass(count) {
+  // Phone: full width; Tablet: two per row; Desktop: larger
+  if (count === 1) return "w-full lg:w-[85%]";
+  if (count === 2) return "w-full sm:w-[48%] lg:w-[45%]";
+  return "w-full sm:w-[48%] lg:w-[30%]"; // 3+
+}
+
 /* ====================== DATA ====================== */
 const LANGUAGES = [
   { label: "SQL", file: "sql.png" },
@@ -64,7 +72,7 @@ const PROJECTS = [
       "An advanced logistics dashboard featuring a Python-powered recommendation tool. Analyses historical shipment data to recommend the most efficient carriers per route.",
     built: "Power BI, Python, DAX",
     focus: "KPI design, routing recommendations, stakeholder reporting",
-    images: ["/projects/logistics.png", "/projects/logistics-2.png"], // fixed names
+    images: ["/projects/logistics.png", "/projects/logistics-2.png"],
   },
   {
     num: "03",
@@ -138,6 +146,18 @@ export default function App() {
 
             {/* Text second on phone */}
             <div className="order-2 sm:order-1 relative">
+              {/* Pill ABOVE the name on all screens */}
+              <div className="mb-4 sm:mb-5 flex sm:block sm:justify-start justify-center">
+                <span
+                  className="px-5 py-1.5 rounded-full text-[11px] tracking-[0.25em]
+                             border-2 border-teal bg-navy/70 backdrop-blur
+                             flex gap-1 items-center justify-center"
+                >
+                  <span className="text-teal font-bold">DATA ANALYST</span>
+                  <span className="text-white font-bold">PORTFOLIO</span>
+                </span>
+              </div>
+
               <div className="relative inline-block">
                 <h1
                   className="font-extrabold leading-[0.9]
@@ -148,22 +168,10 @@ export default function App() {
                   <br />
                   <span className="text-teal">WISE</span>
                 </h1>
-
-                {/* Badge: centered on phone; absolute on sm+ */}
-                <div className="mt-3 flex justify-center sm:mt-0 sm:block sm:absolute sm:-top-12 sm:right-[12%]">
-                  <span
-                    className="px-5 py-1.5 rounded-full text-[11px] tracking-[0.25em]
-                               border-2 border-teal bg-navy/70 backdrop-blur
-                               flex gap-1 items-center justify-center"
-                  >
-                    <span className="text-teal font-bold">DATA ANALYST</span>
-                    <span className="text-white font-bold">PORTFOLIO</span>
-                  </span>
-                </div>
               </div>
 
               {/* Tagline centered on phone */}
-              <p className="mt-6 sm:mt-10 text-[clamp(16px,2.2vw,22px)] text-white/80 max-w-2xl text-center sm:text-left">
+              <p className="mt-6 sm:mt-8 text-[clamp(16px,2.2vw,22px)] text-white/80 max-w-2xl text-center sm:text-left">
                 Finding patterns in the noise, one dataset at a time.
               </p>
             </div>
@@ -232,15 +240,15 @@ export default function App() {
             </span>
           </div>
 
-          {/* Mobile: rows with dividers; lg+: 4 columns */}
-          <div className="space-y-10 lg:space-y-0 lg:grid lg:grid-cols-4 lg:gap-10">
+          {/* Mobile: rows with item dividers; Desktop: no item dividers, use column separators */}
+          <div className="lg:grid lg:grid-cols-4 lg:gap-10">
             {/* Languages */}
-            <div className="border-t border-white/15 pt-6 lg:border-0 lg:pt-0">
+            <div className="border-t border-white/15 pt-6 lg:border-t-0 lg:pt-0 lg:border-r lg:border-white/15">
               <h3 className="text-teal font-extrabold text-3xl font-[var(--font-display)]">Programming</h3>
               <div className="text-white font-extrabold text-3xl font-[var(--font-display)] -mt-1">Languages</div>
-              <ul className="mt-6 divide-y divide-white/10">
+              <ul className="mt-6 divide-y divide-white/10 lg:divide-y-0">
                 {LANGUAGES.map((item) => (
-                  <li key={item.label} className="flex items-center gap-4 py-3">
+                  <li key={item.label} className="flex items-center gap-4 py-3 lg:py-2">
                     <IconDiscImg src={`/icons/${item.file}`} alt={item.label} />
                     <span className="text-lg">{item.label}</span>
                   </li>
@@ -249,12 +257,12 @@ export default function App() {
             </div>
 
             {/* Tools */}
-            <div className="border-t border-white/15 pt-6 lg:border-0 lg:pt-0">
+            <div className="border-t border-white/15 pt-6 lg:border-t-0 lg:pt-0 lg:border-r lg:border-white/15">
               <h3 className="text-teal font-extrabold text-3xl font-[var(--font-display)]">Data Analytic</h3>
               <div className="text-white font-extrabold text-3xl font-[var(--font-display)] -mt-1">Tools</div>
-              <ul className="mt-6 divide-y divide-white/10">
+              <ul className="mt-6 divide-y divide-white/10 lg:divide-y-0">
                 {TOOLS.map((item) => (
-                  <li key={item.label} className="flex items-center gap-4 py-3">
+                  <li key={item.label} className="flex items-center gap-4 py-3 lg:py-2">
                     <IconDiscImg src={`/icons/${item.file}`} alt={item.label} />
                     <span className="text-lg">{item.label}</span>
                   </li>
@@ -263,12 +271,12 @@ export default function App() {
             </div>
 
             {/* Viz */}
-            <div className="border-t border-white/15 pt-6 lg:border-0 lg:pt-0">
+            <div className="border-t border-white/15 pt-6 lg:border-t-0 lg:pt-0 lg:border-r lg:border-white/15">
               <h3 className="text-teal font-extrabold text-3xl font-[var(--font-display)]">Data Visualization</h3>
               <div className="text-white font-extrabold text-3xl font-[var(--font-display)] -mt-1">Tools</div>
-              <ul className="mt-6 divide-y divide-white/10">
+              <ul className="mt-6 divide-y divide-white/10 lg:divide-y-0">
                 {VIZ.map((item) => (
-                  <li key={item.label} className="flex items-center gap-4 py-3">
+                  <li key={item.label} className="flex items-center gap-4 py-3 lg:py-2">
                     <IconDiscImg src={`/icons/${item.file}`} alt={item.label} />
                     <span className="text-lg">{item.label}</span>
                   </li>
@@ -276,11 +284,11 @@ export default function App() {
               </ul>
             </div>
 
-            {/* Methods */}
-            <div className="border-t border-white/15 pt-6 lg:border-0 lg:pt-0">
+            {/* Methods (no icons) */}
+            <div className="border-t border-white/15 pt-6 lg:border-t-0 lg:pt-0">
               <h3 className="text-teal font-extrabold text-3xl font-[var(--font-display)]">Data Analytic</h3>
               <div className="text-white font-extrabold text-3xl font-[var(--font-display)] -mt-1">Methods</div>
-              <div className="mt-6 divide-y divide-white/10">
+              <div className="mt-6 divide-y divide-white/10 lg:divide-y-0">
                 {METHODS.map((m) => (
                   <div key={m} className="py-2.5 text-white/90 text-[15px]">
                     {m}
@@ -350,55 +358,58 @@ export default function App() {
           </div>
 
           <div className="space-y-20">
-            {PROJECTS.map((p) => (
-              <article key={p.num} className="space-y-6">
-                <h3 className="flex justify-center items-baseline gap-4 font-extrabold text-[28px] md:text-[36px] text-center">
-                  <span className="text-white text-4xl md:text-5xl">{p.num}</span>
-                  <span className="text-teal uppercase">{p.title}</span>
-                </h3>
+            {PROJECTS.map((p) => {
+              const count = p.images?.length || 0;
+              const imgClass = projectImgClass(count);
+              return (
+                <article key={p.num} className="space-y-6">
+                  <h3 className="flex justify-center items-baseline gap-4 font-extrabold text-[28px] md:text-[36px] text-center">
+                    <span className="text-white text-4xl md:text-5xl">{p.num}</span>
+                    <span className="text-teal uppercase">{p.title}</span>
+                  </h3>
 
-                {/* Images in a row (wraps on small screens) */}
-                {p.images?.length > 0 && (
-                  <div className="mt-2 flex flex-wrap justify-center gap-4">
-                    {p.images.map((img, i) => (
-                      <img
-                        key={i}
-                        src={img}
-                        alt={p.title}
-                        className="w-full sm:w-[48%] lg:w-[30%] 
-                                   rounded-2xl border border-white/10 object-contain"
-                      />
-                    ))}
-                  </div>
-                )}
+                  {/* Images row (wraps on small screens) */}
+                  {count > 0 && (
+                    <div className="mt-2 flex flex-wrap justify-center gap-4">
+                      {p.images.map((img, i) => (
+                        <img
+                          key={i}
+                          src={img}
+                          alt={p.title}
+                          className={`${imgClass} rounded-2xl border border-white/10 object-contain`}
+                        />
+                      ))}
+                    </div>
+                  )}
 
-                <p className="mt-4 text-white/85 text-lg leading-relaxed text-center max-w-3xl mx-auto">
-                  {p.tagLine}
-                </p>
-                <p className="mt-1 text-sm text-white/70 text-center">
-                  <span className="font-semibold text-white/90">Built with:</span> {p.built}
-                  <span className="mx-2">|</span>
-                  <span className="font-semibold text-white/90">Focus:</span> {p.focus}
-                </p>
+                  <p className="mt-4 text-white/85 text-lg leading-relaxed text-center max-w-3xl mx-auto">
+                    {p.tagLine}
+                  </p>
+                  <p className="mt-1 text-sm text-white/70 text-center">
+                    <span className="font-semibold text-white/90">Built with:</span> {p.built}
+                    <span className="mx-2">|</span>
+                    <span className="font-semibold text-white/90">Focus:</span> {p.focus}
+                  </p>
 
-                {p.buttons && p.buttons.length > 0 && (
-                  <div className="pt-2 flex flex-wrap gap-3 justify-center">
-                    {p.buttons.map((b) => (
-                      <a
-                        key={b.href}
-                        href={b.href}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="inline-flex items-center px-4 py-2 rounded-xl border border-white/20
-                                   hover:border-white/40 hover:bg-white/5 transition"
-                      >
-                        {b.label}
-                      </a>
-                    ))}
-                  </div>
-                )}
-              </article>
-            ))}
+                  {p.buttons && p.buttons.length > 0 && (
+                    <div className="pt-2 flex flex-wrap gap-3 justify-center">
+                      {p.buttons.map((b) => (
+                        <a
+                          key={b.href}
+                          href={b.href}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="inline-flex items-center px-4 py-2 rounded-xl border border-white/20
+                                     hover:border-white/40 hover:bg-white/5 transition"
+                        >
+                          {b.label}
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>
