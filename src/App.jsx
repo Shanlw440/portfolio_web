@@ -99,6 +99,7 @@ const PROJECTS = [
   },
 ];
 
+/* ====================== APP ====================== */
 export default function App() {
   return (
     <div className="min-h-screen bg-navy text-white">
@@ -123,10 +124,9 @@ export default function App() {
       {/* ====================== HERO ====================== */}
       <section id="home" aria-label="Intro">
         <div className="relative max-w-6xl mx-auto px-6 py-20 sm:py-22 lg:py-28">
-          {/* On phone: 1 column but we control order so image shows first.
-              From sm+: two columns. */}
+          {/* Phone: 1 col, image first. From sm+: 2 cols. */}
           <div className="grid grid-cols-1 sm:grid-cols-[1.1fr_0.9fr] gap-6 sm:gap-10 lg:gap-14 items-center">
-            {/* RIGHT image becomes FIRST on phones */}
+            {/* Image first on phone */}
             <div className="order-1 sm:order-2 flex justify-center sm:justify-end">
               <img
                 src="/shannon_circle_transparent.png"
@@ -136,7 +136,7 @@ export default function App() {
               />
             </div>
 
-            {/* LEFT text becomes SECOND on phones */}
+            {/* Text second on phone */}
             <div className="order-2 sm:order-1 relative">
               <div className="relative inline-block">
                 <h1
@@ -149,9 +149,7 @@ export default function App() {
                   <span className="text-teal">WISE</span>
                 </h1>
 
-                {/* Badge:
-                   - On phone: normal flow, centered below the name with spacing.
-                   - From sm+: absolute over the “NNON” like before. */}
+                {/* Badge: centered on phone; absolute on sm+ */}
                 <div className="mt-3 flex justify-center sm:mt-0 sm:block sm:absolute sm:-top-12 sm:right-[12%]">
                   <span
                     className="px-5 py-1.5 rounded-full text-[11px] tracking-[0.25em]
@@ -227,14 +225,14 @@ export default function App() {
       {/* ====================== SKILLS ====================== */}
       <section id="skills" className="border-t border-ink/30">
         <div className="max-w-6xl mx-auto px-6 py-20 lg:py-24">
-          {/* Centered pill with a touch more space on phone */}
+          {/* Pill */}
           <div className="flex justify-center mb-10">
             <span className="px-6 py-2 rounded-full border-2 border-teal bg-teal/10 text-white font-extrabold tracking-[0.28em] text-xs md:text-sm uppercase">
               Technical Skills
             </span>
           </div>
 
-          {/* On mobile: stacked rows with dividers. On lg+: 4 columns. */}
+          {/* Mobile: rows with dividers; lg+: 4 columns */}
           <div className="space-y-10 lg:space-y-0 lg:grid lg:grid-cols-4 lg:gap-10">
             {/* Languages */}
             <div className="border-t border-white/15 pt-6 lg:border-0 lg:pt-0">
@@ -354,13 +352,12 @@ export default function App() {
           <div className="space-y-20">
             {PROJECTS.map((p) => (
               <article key={p.num} className="space-y-6">
-                {/* Number + Title */}
                 <h3 className="flex justify-center items-baseline gap-4 font-extrabold text-[28px] md:text-[36px] text-center">
                   <span className="text-white text-4xl md:text-5xl">{p.num}</span>
                   <span className="text-teal uppercase">{p.title}</span>
                 </h3>
 
-                {/* Images */}
+                {/* Images in a row (wraps on small screens) */}
                 {p.images?.length > 0 && (
                   <div className="mt-2 flex flex-wrap justify-center gap-4">
                     {p.images.map((img, i) => (
@@ -368,14 +365,13 @@ export default function App() {
                         key={i}
                         src={img}
                         alt={p.title}
-                        className="mx-auto w-full max-w-[980px] sm:max-w-[620px] md:max-w-[760px]
+                        className="w-full sm:w-[48%] lg:w-[30%] 
                                    rounded-2xl border border-white/10 object-contain"
                       />
                     ))}
                   </div>
                 )}
 
-                {/* Text */}
                 <p className="mt-4 text-white/85 text-lg leading-relaxed text-center max-w-3xl mx-auto">
                   {p.tagLine}
                 </p>
@@ -385,7 +381,6 @@ export default function App() {
                   <span className="font-semibold text-white/90">Focus:</span> {p.focus}
                 </p>
 
-                {/* Buttons */}
                 {p.buttons && p.buttons.length > 0 && (
                   <div className="pt-2 flex flex-wrap gap-3 justify-center">
                     {p.buttons.map((b) => (
