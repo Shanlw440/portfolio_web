@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800&display=swap');
 /* Tailwind v4 setup */
 @import "tailwindcss";
 
@@ -25,3 +26,54 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 ::selection { background: white; color: var(--color-navy); }
+/* =====================================
+   SHANNON WISE ANALYTICS — TYPOGRAPHY
+   ===================================== */
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: -0.035em;
+}
+
+code,
+pre,
+.font-mono,
+.terminal-code {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Technical section labels */
+.tech-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Code-inspired text highlights */
+.code-accent {
+  font-family: 'JetBrains Mono', monospace;
+  color: #c084fc;
+}
+/* Mobile layout and accessibility safeguards (portfolio review) */
+html { overflow-x: clip; scroll-padding-top: 5rem; }
+body, #root { min-width: 0; }
+img, svg, canvas { max-width: 100%; }
+a, button { -webkit-tap-highlight-color: transparent; }
+:where(a, button):focus-visible { outline: 2px solid #c084fc; outline-offset: 3px; }
+:where(h1, h2, h3, p) { overflow-wrap: break-word; }
+@media (max-width: 639px) {
+  .tech-label { font-size: .65rem; letter-spacing: .06em; }
+  /* Preserve the designs while allowing code samples to scroll inside cards. */
+  pre, .terminal-code { max-width: 100%; overflow-x: auto; }
+  /* Prefer a quieter background on phones. */
+  .cv-aurora-one, .cv-aurora-two, .cv-aurora-three { opacity: .72; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
