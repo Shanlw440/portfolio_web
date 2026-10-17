@@ -342,13 +342,7 @@ function HomePage() {
 
               </p>
 
-              <div className="mt-8 flex flex-col sm:flex-row sm:flex-wrap justify-center lg:justify-start gap-3">
-
-                <a href="/projects" className="inline-flex min-h-11 items-center justify-center rounded-lg bg-purple-600 hover:bg-purple-500 transition px-5 py-3 text-sm font-semibold text-white">Explore Projects ↗</a>
-
-                <a href="/experience#about" className="inline-flex min-h-11 items-center justify-center rounded-lg border border-purple-400/60 bg-[#1b102d]/80 hover:bg-[#2a1842] transition px-5 py-3 text-sm font-semibold text-purple-100">About Me</a>
-
-              </div>
+              
 
             </div>
 
