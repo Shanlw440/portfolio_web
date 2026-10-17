@@ -338,7 +338,7 @@ function HomePage() {
 
               <p className="mt-4 text-[15px] lg:text-[17px] text-white/70 max-w-xl mx-auto lg:mx-0 leading-relaxed">
 
-                Turning complex data into meaningful insights, intelligent automation and practical applications.
+                If there's a smarter way to do it, I want to build it.
 
               </p>
 
