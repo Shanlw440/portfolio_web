@@ -869,9 +869,10 @@ const PROJECT_GALLERY = [
 
     category: "Supply Chain", status: "Completed",
 
-    summary: "Forecast retail demand, estimate safety stock and explore replenishment scenarios with public or synthetic data.",
+    summary: "Inventory / OS — an immersive warehouse explorer and live replenishment laboratory. Stress-test demand, lead times, safety stock and reorder decisions with transparent synthetic data.",
 
-    built: "Python · SQL · Power BI", images: ["/projects/inventory-dashboard.png"]
+    built: "Interactive JavaScript · Inventory modelling · SVG digital twin", images: ["/projects/inventory-dashboard.png"],
+    caseStudy: "/studies/inventory-intelligence/"
 
   },
 
@@ -1103,7 +1104,7 @@ function ProjectsPage() {
               <p className="mt-6 border-t border-white/10 pt-4 font-mono text-xs text-purple-200/80">{project.built}</p>
 
               <div className="mt-5 flex flex-wrap gap-2">
-                {project.caseStudy && <a href={project.caseStudy} className={`rounded-lg border px-3 py-2 text-sm font-semibold transition ${project.category === "NHS" ? "border-sky-400/50 bg-sky-400/15 text-sky-100 hover:bg-sky-400/25" : "border-emerald-400/50 bg-emerald-400/15 text-emerald-100 hover:bg-emerald-400/25"}`}>Explore full case study ↗</a>}
+                {project.caseStudy && <a href={project.caseStudy} className={`rounded-lg border px-3 py-2 text-sm font-semibold transition ${project.num === "05" ? "border-lime-300/60 bg-lime-300/15 text-lime-100 hover:bg-lime-300/25" : project.category === "NHS" ? "border-sky-400/50 bg-sky-400/15 text-sky-100 hover:bg-sky-400/25" : "border-emerald-400/50 bg-emerald-400/15 text-emerald-100 hover:bg-emerald-400/25"}`}>Explore full case study ↗</a>}
                 {project.buttons?.map(button => <a key={button.href} href={button.href} target="_blank" rel="noopener noreferrer" className="rounded-lg border border-purple-400/40 px-3 py-2 text-sm font-semibold text-purple-100 hover:bg-purple-500/15">{button.label} ↗</a>)}
                 {!project.caseStudy && !project.buttons?.length && <span className="w-fit rounded-lg border border-purple-500/20 px-3 py-2 font-mono text-[11px] text-white/45">Project overview</span>}
               </div>
