@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
 <meta name="theme-color" content="#0d0d0b"/>
-<meta name="description" content="INVENTORY / OS — a futuristic interactive inventory planning laboratory by Shannon Wise Analytics. Explore reorder points, safety stock and simulated demand."/>
-<title>INVENTORY / OS — Shannon Wise Analytics</title>
+<meta name="description" content="INVENTORY / OS: a futuristic interactive inventory planning laboratory by Shannon Wise Analytics. Explore reorder points, safety stock and simulated demand."/>
+<title>INVENTORY / OS | Shannon Wise Analytics</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="./inventory.css"/>
@@ -20,12 +20,12 @@
 <main>
 <section class="intro" id="top">
   <div class="intro-noise" aria-hidden="true"></div>
-  <div class="intro-meta"><span>RESEARCH / SUPPLY CHAIN INTELLIGENCE</span><span>001 — 005&nbsp; / &nbsp; INTERACTIVE SYSTEM</span></div>
+  <div class="intro-meta"><span>RESEARCH / SUPPLY CHAIN INTELLIGENCE</span><span>001 / 005&nbsp; / &nbsp; INTERACTIVE SYSTEM</span></div>
   <div class="hero-grid">
     <div class="hero-copy">
       <div class="kicker"><span class="kicker-dot"></span> A WORKING DECISION ENGINE / PROTOTYPE</div>
       <h1>STOCK IS<br/>A <span class="outline-text">MOVING</span><br/>TARGET<span class="period">.</span></h1>
-      <p class="hero-description">What if an inventory dashboard didn't just report the past — but let you <em>change the future?</em> Explore a living warehouse, stress-test demand and see the reorder decision update in real time.</p>
+      <p class="hero-description">What if an inventory dashboard didn't just report the past, but let you <em>change the future?</em> Explore a living warehouse, stress-test demand and see the reorder decision update in real time.</p>
       <div class="intro-actions"><a class="action primary" href="#lab">ENTER THE PLANNING LAB <span>↘</span></a><a class="action secondary" href="https://github.com/Shanlw440/portfolio_web/tree/main/public/studies/inventory-intelligence" target="_blank" rel="noopener noreferrer">VIEW THE CODE ↗</a></div>
     </div>
     <div class="hero-side">
@@ -65,9 +65,9 @@
         <div class="inspector-meta" id="sku-meta">SKU / DEMO-001 / COMPONENTS</div>
         <div class="inspector-status" id="inspector-status">ANALYSING</div>
         <div class="inspector-divider"></div>
-        <div class="measure"><small>ON-HAND INVENTORY</small><div class="measure-value" id="node-stock">—</div><span>UNITS AVAILABLE</span></div>
-        <div class="measure two-measure"><div><small>DAILY DEMAND</small><strong id="node-demand">—</strong><span>UNITS / DAY</span></div><div><small>DAYS OF COVER</small><strong id="node-cover">—</strong><span>DAYS</span></div></div>
-        <div class="recommendation"><small>ENGINE RECOMMENDATION</small><strong id="node-action">CALCULATING</strong><p id="node-reason">—</p></div>
+        <div class="measure"><small>ON-HAND INVENTORY</small><div class="measure-value" id="node-stock">...</div><span>UNITS AVAILABLE</span></div>
+        <div class="measure two-measure"><div><small>DAILY DEMAND</small><strong id="node-demand">...</strong><span>UNITS / DAY</span></div><div><small>DAYS OF COVER</small><strong id="node-cover">...</strong><span>DAYS</span></div></div>
+        <div class="recommendation"><small>ENGINE RECOMMENDATION</small><strong id="node-action">CALCULATING</strong><p id="node-reason">...</p></div>
         <button class="jump-button" type="button" id="inspect-button">TUNE THIS NODE IN THE PLANNER ↘</button>
       </aside>
     </div>
@@ -90,14 +90,14 @@
   <div class="projection-panel">
    <div class="panel-top"><span>42-DAY DIGITAL TWIN</span><span id="forecast-badge" class="small-badge">SCENARIO ACTIVE</span></div>
    <div class="result-grid">
-    <div class="result"><span>REORDER POINT</span><strong id="result-rop">—</strong><small>UNITS / TRIGGER</small></div>
-    <div class="result"><span>SAFETY STOCK</span><strong id="result-safety">—</strong><small>UNITS / BUFFER</small></div>
-    <div class="result accent-result"><span>ORDER SUGGESTION</span><strong id="result-order">—</strong><small>UNITS / IF TRIGGERED</small></div>
+    <div class="result"><span>REORDER POINT</span><strong id="result-rop">...</strong><small>UNITS / TRIGGER</small></div>
+    <div class="result"><span>SAFETY STOCK</span><strong id="result-safety">...</strong><small>UNITS / BUFFER</small></div>
+    <div class="result accent-result"><span>ORDER SUGGESTION</span><strong id="result-order">...</strong><small>UNITS / IF TRIGGERED</small></div>
    </div>
    <div class="chart-head"><strong>PROJECTED INVENTORY POSITION <span class="chart-unit">/ UNITS</span></strong><label class="toggle"><input type="checkbox" id="order-toggle" checked/><span class="toggle-slider"></span> INCLUDE SUGGESTED DELIVERY</label></div>
    <div class="chart-holder"><svg id="forecast-chart" viewBox="0 0 960 325" role="img" aria-label="Projected available inventory over the next 42 days, with reorder point and arrival marker."></svg></div>
    <div class="chart-legend"><span><i class="line-swatch primary-line"></i> STOCK PROJECTION</span><span><i class="line-swatch trigger-line"></i> REORDER POINT</span><span><i class="line-swatch arrival-line"></i> DELIVERY DAY</span></div>
-   <div class="decision-row"><div><span>PLANNING DECISION</span><strong id="decision-message">—</strong></div><p id="decision-detail">—</p></div>
+   <div class="decision-row"><div><span>PLANNING DECISION</span><strong id="decision-message">...</strong></div><p id="decision-detail">...</p></div>
   </div>
  </div>
  <div class="export-bar"><div><span class="label-small">EVERY SKU / ONE MODEL</span><strong>Turn the scenario into a replenishment plan.</strong><small>Export the current parameters and calculated recommendations for all 8 simulated products.</small></div><button type="button" id="export-button" class="action primary">↓ EXPORT PLANNING CSV</button></div>
@@ -127,13 +127,13 @@
  <div class="section-index"><span>05 / RESEARCH & SOURCE</span><span>TRACE THE DECISION LOGIC</span></div>
  <div class="reference-head"><h2>BUILT TO BE<br/>QUESTIONED.</h2><p>Inventory formulas are only as useful as their assumptions. This page shows the method, exposes the parameter choices and provides its complete source so you can reproduce each decision.</p></div>
  <div class="reference-list">
- <a href="https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0702045810.html" target="_blank" rel="noopener noreferrer"><span>01</span><strong>Oracle NetSuite — Inventory optimization calculations</strong><small>Safety stock, z-scores, reorder points and normal-demand assumptions.</small><b>↗</b></a>
- <a href="https://web.mit.edu/course/2/2.810/www/files/readings/King_SafetyStock.pdf" target="_blank" rel="noopener noreferrer"><span>02</span><strong>Inventory Management Review — Safety stock determination</strong><small>Technical discussion of demand and lead-time variability, service levels and model limitations.</small><b>↗</b></a>
- <a href="https://github.com/Shanlw440/portfolio_web/tree/main/public/studies/inventory-intelligence" target="_blank" rel="noopener noreferrer"><span>03</span><strong>Source code — Inventory OS interactive case study</strong><small>Vanilla JavaScript replenishment logic, isometric SVG warehouse, charts and CSV export.</small><b>↗</b></a>
+ <a href="https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0702045810.html" target="_blank" rel="noopener noreferrer"><span>01</span><strong>Oracle NetSuite: Inventory optimization calculations</strong><small>Safety stock, z-scores, reorder points and normal-demand assumptions.</small><b>↗</b></a>
+ <a href="https://web.mit.edu/course/2/2.810/www/files/readings/King_SafetyStock.pdf" target="_blank" rel="noopener noreferrer"><span>02</span><strong>Inventory Management Review: Safety stock determination</strong><small>Technical discussion of demand and lead-time variability, service levels and model limitations.</small><b>↗</b></a>
+ <a href="https://github.com/Shanlw440/portfolio_web/tree/main/public/studies/inventory-intelligence" target="_blank" rel="noopener noreferrer"><span>03</span><strong>Source code: Inventory OS interactive case study</strong><small>Vanilla JavaScript replenishment logic, isometric SVG warehouse, charts and CSV export.</small><b>↗</b></a>
  </div>
 </section>
 <section class="outro"><div class="outro-overline">THIS IS WHAT I BUILD.</div><h2>FROM DATA<br/>TO <span>DECISIONS.</span></h2><p>A full-stack thinking exercise in operational analytics: model the problem, design the decision and make the result explorable.</p><div class="outro-actions"><a class="action primary" href="#lab">↗ RE-LAUNCH THE DEMO</a><a class="action secondary" href="/projects">← BACK TO ALL PROJECTS</a></div></section>
 </main>
-<footer><span>© 2026 SHANNON WISE / ANALYTICS</span><span>INVENTORY / OS — EDUCATIONAL PROTOTYPE</span><a href="/projects">ALL PROJECTS ↗</a></footer>
+<footer><span>© 2026 SHANNON WISE / ANALYTICS</span><span>INVENTORY / OS / EDUCATIONAL PROTOTYPE</span><a href="/projects">ALL PROJECTS ↗</a></footer>
 </body>
 </html>
