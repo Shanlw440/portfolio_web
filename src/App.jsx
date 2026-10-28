@@ -122,7 +122,7 @@ const PROJECTS = [
 
     num: "01",
 
-    title: "DQ-AI — Data Quality Auditor",
+    title: "DQ-AI: Data Quality Auditor",
 
     tagLine:
 
@@ -354,7 +354,7 @@ function HomePage() {
 
           </div>
 
-          {/* Six dedicated pages — this is navigation, not a page-scrolling menu. */}
+          {/* Six dedicated pages: this is navigation, not a page-scrolling menu. */}
 
           <div className="pointer-events-auto mx-auto mt-16 max-w-6xl border-t border-purple-400/15 pt-10 sm:mt-20">
 
@@ -869,7 +869,7 @@ const PROJECT_GALLERY = [
 
     category: "Supply Chain", status: "Completed",
 
-    summary: "Inventory / OS — an immersive warehouse explorer and live replenishment laboratory. Stress-test demand, lead times, safety stock and reorder decisions with transparent synthetic data.",
+    summary: "Inventory / OS: an immersive warehouse explorer and live replenishment laboratory. Stress-test demand, lead times, safety stock and reorder decisions with transparent synthetic data.",
 
     built: "Interactive JavaScript · Inventory modelling · SVG digital twin", images: ["/projects/inventory-dashboard.png"],
     caseStudy: "/studies/inventory-intelligence/"
