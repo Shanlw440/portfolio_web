@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="theme-color" content="#0d0d0b"/>
+<meta name="description" content="INVENTORY / OS — a futuristic interactive inventory planning laboratory by Shannon Wise Analytics. Explore reorder points, safety stock and simulated demand."/>
+<title>INVENTORY / OS — Shannon Wise Analytics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="./inventory.css"/>
+<script src="./inventory.js" defer></script>
+</head>
+<body>
+<div class="site-progress" aria-hidden="true"></div>
+<header class="topbar">
+  <a class="brand" href="/" aria-label="Shannon Wise Analytics homepage">SW<span class="brand-mark">✳</span><span class="brand-sub">ANALYTICS</span></a>
+  <div class="topbar-middle"><span class="status-light"></span> INDEPENDENT DIGITAL LAB <span class="topbar-slash">/</span> EXPERIMENT 005</div>
+  <a class="backlink" href="/projects">← ALL PROJECTS</a>
+</header>
+<main>
+<section class="intro" id="top">
+  <div class="intro-noise" aria-hidden="true"></div>
+  <div class="intro-meta"><span>RESEARCH / SUPPLY CHAIN INTELLIGENCE</span><span>001 — 005&nbsp; / &nbsp; INTERACTIVE SYSTEM</span></div>
+  <div class="hero-grid">
+    <div class="hero-copy">
+      <div class="kicker"><span class="kicker-dot"></span> A WORKING DECISION ENGINE / PROTOTYPE</div>
+      <h1>STOCK IS<br/>A <span class="outline-text">MOVING</span><br/>TARGET<span class="period">.</span></h1>
+      <p class="hero-description">What if an inventory dashboard didn't just report the past — but let you <em>change the future?</em> Explore a living warehouse, stress-test demand and see the reorder decision update in real time.</p>
+      <div class="intro-actions"><a class="action primary" href="#lab">ENTER THE PLANNING LAB <span>↘</span></a><a class="action secondary" href="https://github.com/Shanlw440/portfolio_web/tree/main/public/studies/inventory-intelligence" target="_blank" rel="noopener noreferrer">VIEW THE CODE ↗</a></div>
+    </div>
+    <div class="hero-side">
+      <div class="orbit-emblem" aria-hidden="true"><div class="emblem-core">I<span>/</span>O</div><div class="emblem-ring ring-one"></div><div class="emblem-ring ring-two"></div><div class="emblem-ring ring-three"></div><div class="emblem-cross cross-a"></div><div class="emblem-cross cross-b"></div><span class="emblem-annotation ann-a">DEMAND</span><span class="emblem-annotation ann-b">SUPPLY</span><span class="emblem-annotation ann-c">SIGNAL</span></div>
+      <div class="emblem-foot"><span>INTELLIGENCE / MODEL / CONTROL</span><span>BUILD 01.0</span></div>
+    </div>
+  </div>
+  <div class="scroll-cue"><span>SCROLL TO INTERACT</span><span class="down-mark">↓</span><span>THE SYSTEM IS LIVE BELOW</span></div>
+</section>
+<div class="marquee" aria-hidden="true"><div class="marquee-track">OBSERVE THE STOCK&nbsp; ✳ &nbsp;MODEL THE DEMAND&nbsp; ✳ &nbsp;CONTROL THE RISK&nbsp; ✳ &nbsp;OBSERVE THE STOCK&nbsp; ✳ &nbsp;MODEL THE DEMAND&nbsp; ✳ &nbsp;CONTROL THE RISK&nbsp; ✳ &nbsp;OBSERVE THE STOCK&nbsp; ✳ &nbsp;</div></div>
+<section class="lab-section" id="lab">
+  <div class="section-index"><span>01 / THE LIVE EXPERIMENT</span><span>SIMULATED SUPPLY CHAIN / 8 INVENTORY NODES</span></div>
+  <div class="lab-heading"><div><span class="eyebrow">THIS ISN'T A SCREENSHOT</span><h2>THE WAREHOUSE<br/><span>THAT THINKS.</span></h2></div><p>Click a storage node in the warehouse or choose a product from the signal list. Every control below changes the same inventory model: the 3D-style scene, stock classification, reorder decision and forecast.</p></div>
+  <div class="command-deck">
+    <div class="deck-bar"><span><b class="live-dot"></b> INVENTORY / OS <i>LIVE SANDBOX</i></span><span class="deck-bar-right">FACILITY A-01&nbsp;&nbsp; / &nbsp;&nbsp; SYNTHETIC DATASET&nbsp;&nbsp; <span class="desk-time">LOCAL SIMULATION</span></span></div>
+    <div class="deck-body">
+      <aside class="node-rail" aria-label="Select an inventory product">
+        <div class="rail-title"><span>STORAGE NETWORK</span><span>08 NODES</span></div>
+        <div class="node-list" id="node-list"><p class="loading-placeholder">Initialising nodes…</p></div>
+        <div class="rail-foot"><span class="square healthy"></span> STABLE <span class="square reorder"></span> REORDER <span class="square critical"></span> CRITICAL</div>
+      </aside>
+      <div class="warehouse-pane">
+        <div class="stage-head"><div><span>ISOMETRIC / FACILITY A-01</span><strong>NETWORK OVERVIEW</strong></div><div class="stage-head-right">INTERACTIVE MODEL <span class="crosshair">⌖</span></div></div>
+        <div class="warehouse-stage" id="warehouse-stage">
+          <div class="stage-glow" aria-hidden="true"></div>
+          <svg id="warehouse-svg" viewBox="0 0 920 560" role="img" aria-label="Isometric warehouse with eight selectable storage racks. Choose a rack to inspect its inventory."></svg>
+          <div class="stage-overlay stage-overlay-a"><span>08</span><small>STORAGE NODES</small></div>
+          <div class="stage-overlay stage-overlay-b"><span id="stage-risk">--</span><small>REQUIRING ACTION</small></div>
+          <div class="stage-instruction">↖ SELECT ANY STORAGE NODE TO INSPECT</div>
+        </div>
+        <div class="stage-foot"><span>◉ SYSTEM ONLINE</span><span id="selection-foot">NODE A1 / READY</span><span>↗ LIVE COMPUTATION ENABLED</span></div>
+      </div>
+      <aside class="inspector">
+        <div class="inspector-title"><span>SELECTED NODE</span><span class="inspector-blink">●</span></div>
+        <div class="inspector-id" id="sku-id">A1</div>
+        <div class="inspector-name" id="sku-name">Solar Chargers</div>
+        <div class="inspector-meta" id="sku-meta">SKU / DEMO-001 / COMPONENTS</div>
+        <div class="inspector-status" id="inspector-status">ANALYSING</div>
+        <div class="inspector-divider"></div>
+        <div class="measure"><small>ON-HAND INVENTORY</small><div class="measure-value" id="node-stock">—</div><span>UNITS AVAILABLE</span></div>
+        <div class="measure two-measure"><div><small>DAILY DEMAND</small><strong id="node-demand">—</strong><span>UNITS / DAY</span></div><div><small>DAYS OF COVER</small><strong id="node-cover">—</strong><span>DAYS</span></div></div>
+        <div class="recommendation"><small>ENGINE RECOMMENDATION</small><strong id="node-action">CALCULATING</strong><p id="node-reason">—</p></div>
+        <button class="jump-button" type="button" id="inspect-button">TUNE THIS NODE IN THE PLANNER ↘</button>
+      </aside>
+    </div>
+  </div>
+  <div class="lab-caption"><span>EXPERIENCE NOTE 01</span><p>The model is an interactive <strong>scenario demonstration</strong>, not a connection to a live warehouse. All eight SKUs, demand rates, costs and stock levels are fictional. The underlying calculations and outputs are real.</p></div>
+</section>
+<section class="planner-section" id="planner">
+ <div class="section-index"><span>02 / ENGINE ROOM</span><span>MAKE A CHANGE → WATCH THE SYSTEM RESPOND</span></div>
+ <div class="planner-top"><div><span class="eyebrow">THE REPLENISHMENT SIMULATOR</span><h2>YOU'RE IN<br/><span>CONTROL.</span></h2></div><p>Try a sudden demand spike, a longer supplier lead time or a higher service-level target. The tool recalculates the buffer, reorder trigger, purchase suggestion and 42-day stock path.</p></div>
+ <div class="simulator">
+  <div class="controls-panel">
+   <div class="panel-top"><span>INPUT SIGNALS</span><button id="reset-button" class="text-button" type="button">↺ RESET ALL</button></div>
+   <div class="active-sku"><span class="label-small">CURRENTLY CONFIGURING</span><strong><span id="control-id">A1</span> <span id="control-name">Solar Chargers</span></strong></div>
+   <div class="control"><div class="control-label"><label for="demand-slider">DEMAND SHIFT</label><output id="demand-out">100%</output></div><input type="range" id="demand-slider" min="50" max="200" step="5" value="100"/><div class="slider-ends"><span>50% / LOW</span><span>200% / SURGE</span></div></div>
+   <div class="control"><div class="control-label"><label for="lead-slider">SUPPLIER LEAD TIME</label><output id="lead-out">9 DAYS</output></div><input type="range" id="lead-slider" min="2" max="28" step="1" value="9"/><div class="slider-ends"><span>02 DAYS</span><span>28 DAYS</span></div></div>
+   <div class="control"><div class="control-label"><label for="stock-slider">SELECTED SKU ON HAND</label><output id="stock-out">430 U</output></div><input type="range" id="stock-slider" min="0" max="1600" step="10" value="430"/><div class="slider-ends"><span>0 UNITS</span><span>1,600 UNITS</span></div></div>
+   <fieldset class="service-field"><legend>TARGET CYCLE SERVICE LEVEL</legend><div class="services"><label><input type="radio" name="service" value="90"/><span>90%</span></label><label><input type="radio" name="service" value="95" checked/><span>95%</span></label><label><input type="radio" name="service" value="98"/><span>98%</span></label><label><input type="radio" name="service" value="99"/><span>99%</span></label></div></fieldset>
+   <div class="controls-note">MODEL ASSUMPTIONS / Constant average demand, variable independent daily demand, fixed replenishment lead time, no incoming stock, review period of 14 days. Output is an educational policy illustration.</div>
+  </div>
+  <div class="projection-panel">
+   <div class="panel-top"><span>42-DAY DIGITAL TWIN</span><span id="forecast-badge" class="small-badge">SCENARIO ACTIVE</span></div>
+   <div class="result-grid">
+    <div class="result"><span>REORDER POINT</span><strong id="result-rop">—</strong><small>UNITS / TRIGGER</small></div>
+    <div class="result"><span>SAFETY STOCK</span><strong id="result-safety">—</strong><small>UNITS / BUFFER</small></div>
+    <div class="result accent-result"><span>ORDER SUGGESTION</span><strong id="result-order">—</strong><small>UNITS / IF TRIGGERED</small></div>
+   </div>
+   <div class="chart-head"><strong>PROJECTED INVENTORY POSITION <span class="chart-unit">/ UNITS</span></strong><label class="toggle"><input type="checkbox" id="order-toggle" checked/><span class="toggle-slider"></span> INCLUDE SUGGESTED DELIVERY</label></div>
+   <div class="chart-holder"><svg id="forecast-chart" viewBox="0 0 960 325" role="img" aria-label="Projected available inventory over the next 42 days, with reorder point and arrival marker."></svg></div>
+   <div class="chart-legend"><span><i class="line-swatch primary-line"></i> STOCK PROJECTION</span><span><i class="line-swatch trigger-line"></i> REORDER POINT</span><span><i class="line-swatch arrival-line"></i> DELIVERY DAY</span></div>
+   <div class="decision-row"><div><span>PLANNING DECISION</span><strong id="decision-message">—</strong></div><p id="decision-detail">—</p></div>
+  </div>
+ </div>
+ <div class="export-bar"><div><span class="label-small">EVERY SKU / ONE MODEL</span><strong>Turn the scenario into a replenishment plan.</strong><small>Export the current parameters and calculated recommendations for all 8 simulated products.</small></div><button type="button" id="export-button" class="action primary">↓ EXPORT PLANNING CSV</button></div>
+ <div class="table-wrap"><div class="table-head"><span>ALL NODES / LIVE REPLENISHMENT PRIORITIES</span><span>SELECT A ROW TO FOCUS</span></div><div class="table-scroll"><table><thead><tr><th>NODE / PRODUCT</th><th>ON HAND</th><th>DAY DEMAND</th><th>SAFETY</th><th>REORDER AT</th><th>SUGG. ORDER</th><th>COVER</th><th>STATUS</th></tr></thead><tbody id="planner-rows"></tbody></table></div></div>
+</section>
+<section class="methods-section" id="story">
+  <div class="section-index"><span>03 / THE STUDY</span><span>BEHIND THE INTERFACE</span></div>
+  <div class="story-title"><span class="eyebrow">FROM REACTIVE TO PROACTIVE</span><h2>THE MOST EXPENSIVE<br/>NUMBER IS OFTEN <em>ZERO.</em></h2></div>
+  <div class="story-split"><div class="story-number">001<div class="story-number-caption">THE PROBLEM / INVENTORY PLANNING</div></div><div class="story-text"><h3>Too much stock ties up cash. Too little stops the operation.</h3><p>A conventional inventory report tells you how much is sitting in the warehouse. It may not tell you whether that amount will survive a late supplier delivery, a change in demand or a service-level requirement.</p><p>The decision is not simply <em>how much do we have?</em> It is <em>when should we reorder, how much buffer is justified, and which items need attention first?</em></p></div></div>
+  <div class="method-blocks">
+   <article class="method-block"><span>01 / DEMAND SIGNAL</span><strong>MODEL</strong><p>Translate the average daily sales rate into lead-time demand, then stress-test that rate using the demand-shift slider.</p></article>
+   <article class="method-block"><span>02 / RISK BUFFER</span><strong>PROTECT</strong><p>Use a service-level z-score, observed demand variability and lead-time square root to estimate a safety-stock buffer.</p></article>
+   <article class="method-block"><span>03 / ACTION POLICY</span><strong>DECIDE</strong><p>Recommend an order when the simulated inventory position crosses the reorder point, targeting lead time plus a 14-day review horizon.</p></article>
+   <article class="method-block"><span>04 / VISUAL FEEDBACK</span><strong>EXPLAIN</strong><p>Show what changes, why it changes and the expected inventory path, including the hypothetical replenishment arrival.</p></article>
+  </div>
+</section>
+<section class="logic-section" id="logic">
+ <div class="section-index"><span>04 / OPEN THE BLACK BOX</span><span>MODEL TRANSPARENCY</span></div>
+ <div class="logic-layout"><div class="logic-lead"><span class="eyebrow">REAL MATHEMATICS. SYNTHETIC DATA.</span><h2>NO MAGIC.<br/><span>JUST MATH.</span></h2><p>The interactive visual is the interface. The decisions come from deterministic inventory formulas, with rounding up to whole units. This makes the outputs inspectable and reproducible.</p><a class="source-text-link" href="https://github.com/Shanlw440/portfolio_web/blob/main/public/studies/inventory-intelligence/inventory.js" target="_blank" rel="noopener noreferrer">↗ READ THE ENGINE SOURCE</a></div><div class="formula-stack">
+ <div class="formula"><span>FORMULA / 01</span><strong>Safety stock</strong><code>ceil( z × σ_daily × √lead_time )</code><p>Buffer for variability assuming independent daily demand and fixed lead time.</p></div>
+ <div class="formula"><span>FORMULA / 02</span><strong>Reorder point</strong><code>ceil( μ_daily × lead_time + safety_stock )</code><p>When on-hand stock falls to or below this threshold, trigger replenishment. No outstanding orders are assumed.</p></div>
+ <div class="formula"><span>FORMULA / 03</span><strong>Order-up-to level</strong><code>ceil( μ × (L + 14) + z × σ × √(L + 14) )</code><p>Our explicitly chosen demo policy: cover the fixed lead time plus a 14-day review period. When triggered, order the gap to this target.</p></div>
+ </div></div>
+ <div class="method-note"><b>LIMITATIONS / READ BEFORE APPLYING</b><p>The calculator is not a probabilistic Monte Carlo simulation, demand forecast fitted to historical data, or live stock ledger. Daily demand averages and standard deviations are invented demo inputs. The simple normal-demand model assumes independent variation, fixed lead time, immediate full receipt on the arrival day, and no planned receipts or minimum order quantities. It does not model lost sales, backorders, seasonality, supplier reliability, case packs or warehouse constraints. The chart is a deterministic expected-demand scenario, not a confidence interval or a guaranteed delivery outcome.</p></div>
+</section>
+<section class="reference-section" id="references">
+ <div class="section-index"><span>05 / RESEARCH & SOURCE</span><span>TRACE THE DECISION LOGIC</span></div>
+ <div class="reference-head"><h2>BUILT TO BE<br/>QUESTIONED.</h2><p>Inventory formulas are only as useful as their assumptions. This page shows the method, exposes the parameter choices and provides its complete source so you can reproduce each decision.</p></div>
+ <div class="reference-list">
+ <a href="https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0702045810.html" target="_blank" rel="noopener noreferrer"><span>01</span><strong>Oracle NetSuite — Inventory optimization calculations</strong><small>Safety stock, z-scores, reorder points and normal-demand assumptions.</small><b>↗</b></a>
+ <a href="https://web.mit.edu/course/2/2.810/www/files/readings/King_SafetyStock.pdf" target="_blank" rel="noopener noreferrer"><span>02</span><strong>Inventory Management Review — Safety stock determination</strong><small>Technical discussion of demand and lead-time variability, service levels and model limitations.</small><b>↗</b></a>
+ <a href="https://github.com/Shanlw440/portfolio_web/tree/main/public/studies/inventory-intelligence" target="_blank" rel="noopener noreferrer"><span>03</span><strong>Source code — Inventory OS interactive case study</strong><small>Vanilla JavaScript replenishment logic, isometric SVG warehouse, charts and CSV export.</small><b>↗</b></a>
+ </div>
+</section>
+<section class="outro"><div class="outro-overline">THIS IS WHAT I BUILD.</div><h2>FROM DATA<br/>TO <span>DECISIONS.</span></h2><p>A full-stack thinking exercise in operational analytics: model the problem, design the decision and make the result explorable.</p><div class="outro-actions"><a class="action primary" href="#lab">↗ RE-LAUNCH THE DEMO</a><a class="action secondary" href="/projects">← BACK TO ALL PROJECTS</a></div></section>
+</main>
+<footer><span>© 2026 SHANNON WISE / ANALYTICS</span><span>INVENTORY / OS — EDUCATIONAL PROTOTYPE</span><a href="/projects">ALL PROJECTS ↗</a></footer>
+</body>
+</html>
