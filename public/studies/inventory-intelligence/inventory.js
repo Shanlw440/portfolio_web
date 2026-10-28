@@ -1,4 +1,4 @@
-/* INVENTORY / OS — analytical sandbox, not a production inventory system.
+/* INVENTORY / OS: analytical sandbox, not a production inventory system.
    All example item data is SYNTHETIC. No personal, employer or live operational data.
    Deterministic safety stock: ceil(z * sigma_daily * sqrt(lead_time)).
    Simple order-up-to policy: trigger if on_hand <= ROP; target = demand*(L+14) + buffer(L+14).
