@@ -910,7 +910,7 @@ const PROJECT_GALLERY = [
 
     summary: "Place Intelligence: an interactive geospatial atlas with selectable local authorities, ONS Census density comparisons, and a hypothetical public service planning lab.",
 
-    built: "Geospatial SVG · Census 2021 · JavaScript modelling", images: ["/projects/local-authority-dashboard.png"],
+    built: "Geospatial SVG · Census 2021 · JavaScript modelling", images: ["/projects/local-authority-preview.svg"],
     caseStudy: "/studies/local-authority-insights/"
 
   },
