@@ -908,9 +908,23 @@ const PROJECT_GALLERY = [
 
     category: "Public Sector", status: "Completed",
 
-    summary: "Compare local-authority demographic and geographic indicators using open public datasets.",
+    summary: "Place Intelligence: an interactive geospatial atlas with selectable local authorities, ONS Census density comparisons, and a hypothetical public service planning lab.",
 
-    built: "Python · Mapping · ONS data", images: ["/projects/local-authority-dashboard.png"]
+    built: "Geospatial SVG · Census 2021 · JavaScript modelling", images: ["/projects/local-authority-dashboard.png"],
+    caseStudy: "/studies/local-authority-insights/"
+
+  },
+
+  {
+
+    num: "09", title: "PokéLab: Snorlax vs Gengar",
+
+    category: "Creative", status: "Completed",
+
+    summary: "A playful Pokémon analytics lab featuring a six-axis radar, species base stat comparisons and your own interactive weighted scouting model.",
+
+    built: "Data storytelling · Interactive SVG · JavaScript", images: ["/projects/pokelab-preview.svg"],
+    caseStudy: "/studies/pokelab/"
 
   },
 
@@ -938,7 +952,7 @@ const PROJECT_GALLERY = [
 
 
 
-const PROJECT_FILTERS = ["All", "Education", "NHS", "Public Sector", "Supply Chain", "Commercial"];
+const PROJECT_FILTERS = ["All", "Education", "NHS", "Public Sector", "Supply Chain", "Commercial", "Creative"];
 
 
 
@@ -1104,7 +1118,7 @@ function ProjectsPage() {
               <p className="mt-6 border-t border-white/10 pt-4 font-mono text-xs text-purple-200/80">{project.built}</p>
 
               <div className="mt-5 flex flex-wrap gap-2">
-                {project.caseStudy && <a href={project.caseStudy} className={`rounded-lg border px-3 py-2 text-sm font-semibold transition ${project.num === "05" ? "border-lime-300/60 bg-lime-300/15 text-lime-100 hover:bg-lime-300/25" : project.category === "NHS" ? "border-sky-400/50 bg-sky-400/15 text-sky-100 hover:bg-sky-400/25" : "border-emerald-400/50 bg-emerald-400/15 text-emerald-100 hover:bg-emerald-400/25"}`}>Explore full case study ↗</a>}
+                {project.caseStudy && <a href={project.caseStudy} className={`rounded-lg border px-3 py-2 text-sm font-semibold transition ${project.num === "05" ? "border-lime-300/60 bg-lime-300/15 text-lime-100 hover:bg-lime-300/25" : project.num === "08" ? "border-orange-400/60 bg-orange-400/15 text-orange-100 hover:bg-orange-400/25" : project.num === "09" ? "border-pink-400/60 bg-pink-400/15 text-pink-100 hover:bg-pink-400/25" : project.category === "NHS" ? "border-sky-400/50 bg-sky-400/15 text-sky-100 hover:bg-sky-400/25" : "border-emerald-400/50 bg-emerald-400/15 text-emerald-100 hover:bg-emerald-400/25"}`}>Explore full case study ↗</a>}
                 {project.buttons?.map(button => <a key={button.href} href={button.href} target="_blank" rel="noopener noreferrer" className="rounded-lg border border-purple-400/40 px-3 py-2 text-sm font-semibold text-purple-100 hover:bg-purple-500/15">{button.label} ↗</a>)}
                 {!project.caseStudy && !project.buttons?.length && <span className="w-fit rounded-lg border border-purple-500/20 px-3 py-2 font-mono text-[11px] text-white/45">Project overview</span>}
               </div>
