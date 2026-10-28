@@ -17,7 +17,7 @@
 @media(max-width:640px) { .python-terminal {min-height:320px;} .python-terminal__body {padding:16px 13px 48px;min-height:270px;} .python-terminal__code {font-size:10px;min-height:210px;} .python-terminal__title {font-size:9px;} }
 @media(prefers-reduced-motion:reduce) { .python-terminal__cursor {animation:none;} }
 
-/* Python syntax colours — applies as characters are typed */
+/* Python syntax colours: applies as characters are typed */
 .python-terminal__title,
 .python-terminal__replay { font-family: 'JetBrains Mono', monospace; }
 .python-terminal__code { font-family: 'JetBrains Mono', monospace; }
