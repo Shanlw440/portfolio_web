@@ -883,7 +883,8 @@ const PROJECT_GALLERY = [
 
     summary: "Explore attendance patterns, attainment trends and gaps using published education statistics.",
 
-    built: "Python · Power BI · DfE data", images: ["/projects/education-dashboard.png"]
+    built: "Interactive JavaScript · DfE open data · Evidence-led storytelling", images: ["/projects/education-dashboard.png"],
+    caseStudy: "/studies/attendance-gap/"
 
   },
 
@@ -1100,7 +1101,11 @@ function ProjectsPage() {
 
               <p className="mt-6 border-t border-white/10 pt-4 font-mono text-xs text-purple-200/80">{project.built}</p>
 
-              {project.buttons?.length ? <div className="mt-5 flex flex-wrap gap-2">{project.buttons.map(button => <a key={button.href} href={button.href} target="_blank" rel="noopener noreferrer" className="rounded-lg border border-purple-400/40 px-3 py-2 text-sm font-semibold text-purple-100 hover:bg-purple-500/15">{button.label} ↗</a>)}</div> : <span className="mt-5 w-fit rounded-lg border border-purple-500/20 px-3 py-2 font-mono text-[11px] text-white/45">{"Project overview"}</span>}
+              <div className="mt-5 flex flex-wrap gap-2">
+                {project.caseStudy && <a href={project.caseStudy} className="rounded-lg border border-emerald-400/50 bg-emerald-400/15 px-3 py-2 text-sm font-semibold text-emerald-100 transition hover:bg-emerald-400/25">Explore full case study ↗</a>}
+                {project.buttons?.map(button => <a key={button.href} href={button.href} target="_blank" rel="noopener noreferrer" className="rounded-lg border border-purple-400/40 px-3 py-2 text-sm font-semibold text-purple-100 hover:bg-purple-500/15">{button.label} ↗</a>)}
+                {!project.caseStudy && !project.buttons?.length && <span className="w-fit rounded-lg border border-purple-500/20 px-3 py-2 font-mono text-[11px] text-white/45">Project overview</span>}
+              </div>
 
             </div>
 
