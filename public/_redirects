@@ -1,0 +1,3 @@
+# Allow direct links to React Router pages (including /projects).
+# Netlify serves existing static files first, preserving standalone case studies.
+/*    /index.html   200
