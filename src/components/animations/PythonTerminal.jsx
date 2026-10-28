@@ -65,7 +65,7 @@ export default function PythonTerminal() {
         <div className="python-terminal__dots" aria-hidden="true">
           <span /><span /><span />
         </div>
-        <span className="python-terminal__title">shannon@analytics — python3</span>
+        <span className="python-terminal__title">shannon@analytics / python3</span>
         <span className="python-terminal__bars" aria-hidden="true">▮▮▮</span>
       </div>
       <div className="python-terminal__body">
