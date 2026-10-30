@@ -37,6 +37,7 @@ function buildDatabase(){
    c.run([id,date,customer,product,quantity,status]);
  }
  c.free();
+ db.run('PRAGMA query_only = ON;');
  initialized=true;latest={columns:[],values:[]};
  $('execute').disabled=false;$('export').disabled=true;
  $('result-summary').textContent='DATABASE READY / 138 SYNTHETIC RECORDS';
