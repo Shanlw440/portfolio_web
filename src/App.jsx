@@ -460,9 +460,9 @@ function ToolsPage() {
 
             <h2 className="mt-3 text-4xl font-extrabold sm:text-5xl">Tools I've <span className="text-purple-400">Built.</span></h2>
 
-            <p className="mt-4 max-w-2xl leading-relaxed text-white/70">Practical applications for cleaner data, faster workflows, and better decisions. Explore what's live now and what's coming next.</p>
+            <p className="mt-4 max-w-2xl leading-relaxed text-white/70">Working browser tools for comparing spreadsheets, analysing locations and exploring SQL, plus the original Python-powered DQ-AI auditor.</p>
 
-            <p className="mt-4 font-mono text-xs text-emerald-300/90">SELECT * FROM tools WHERE status IN ('live', 'building');</p>
+            <p className="mt-4 font-mono text-xs text-emerald-300/90">SELECT * FROM tools WHERE status = 'live';</p>
 
           </header>
 
@@ -484,17 +484,17 @@ function ToolsPage() {
 
             {[
 
-              { name: "Spreadsheet Comparison", details: "Compare workbooks, detect changed records and export a clear differences report.", stack: "Python / Pandas / Excel" },
+              { name: "Spreadsheet Comparison", details: "Compare Excel and CSV workbooks, identify added, removed and changed records, check duplicate keys, and export detailed differences.", stack: "Browser JavaScript / Excel / CSV", url: "/apps/spreadsheet-comparison/", tone: "violet" },
 
-              { name: "GeoInsights", details: "Explore geographic patterns and postcode data through interactive maps.", stack: "Python / GeoPandas / Maps" },
+              { name: "GeoInsights", details: "Search real UK postcodes, map nearby areas, geocode batches and export location data with an interactive geographic view.", stack: "Postcodes.io / Leaflet / OpenStreetMap", url: "/apps/geoinsights/", tone: "teal" },
 
-              { name: "SQL Query Lab", details: "Experiment with queries and explore sample datasets directly in your browser.", stack: "SQL / DuckDB / React" },
+              { name: "SQL Query Lab", details: "Run real SQLite queries in your browser. Explore linked fictional datasets, practise joins and aggregations, then export query results.", stack: "SQLite WebAssembly / JavaScript", url: "/apps/sql-query-lab/", tone: "sky" },
 
             ].map((tool) => (
 
               <article key={tool.name} className="pointer-events-auto flex h-full flex-col rounded-2xl border border-purple-500/25 bg-[#160e27]/95 p-6 backdrop-blur-md transition duration-200 hover:-translate-y-1 hover:border-purple-400/60">
 
-                <span className="font-mono text-[11px] font-bold uppercase tracking-widest text-purple-300">◌ Planned build</span>
+                <span className="font-mono text-[11px] font-bold uppercase tracking-widest text-emerald-300">● Live browser application</span>
 
                 <h3 className="mt-4 text-xl font-bold text-white">{tool.name}</h3>
 
@@ -502,7 +502,7 @@ function ToolsPage() {
 
                 <p className="mt-5 font-mono text-[11px] text-purple-200/80">{tool.stack}</p>
 
-                <span className="mt-4 inline-flex w-fit rounded-lg border border-purple-500/35 px-4 py-3 text-xs font-semibold text-purple-200">In development</span>
+                <a href={tool.url} className={`mt-4 inline-flex w-fit rounded-lg border px-4 py-3 text-sm font-semibold transition hover:-translate-y-0.5 ${tool.tone === "teal" ? "border-teal-400/55 bg-teal-400/15 text-teal-100 hover:bg-teal-400/25" : tool.tone === "sky" ? "border-sky-400/55 bg-sky-400/15 text-sky-100 hover:bg-sky-400/25" : "border-purple-400/55 bg-purple-500/25 text-purple-100 hover:bg-purple-500/35"}`}>Launch app ↗</a>
 
               </article>
 
